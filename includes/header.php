@@ -40,7 +40,7 @@ if (isset($_GET['query'])) {
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="directory.php">View Alumni</a></li>
           <li class="nav-item"><a class="nav-link" href="events.php">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="view_advertisements">Job Listing</a></li>
+          <li class="nav-item"><a class="nav-link" href="view_advertisements.php">Job Listing</a></li>
           <li class="nav-item"><a class="nav-link" href="feedback.php">Feedback</a></li>
           <li class="nav-item"><a class="nav-link" href="inbox.php">Messages</a></li>
           <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
