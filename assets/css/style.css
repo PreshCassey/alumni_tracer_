@@ -4,3 +4,8 @@
 .login-area1 {
     background:  #F3F8FB;  
 }
+.bg-hero{
+    background: url(../images/banner1.jpg);
+    background-size: cover;
+}
+

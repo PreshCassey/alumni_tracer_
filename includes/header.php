@@ -17,53 +17,46 @@ if (isset($_GET['query'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>Alumni</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-  <meta charset="UTF-8">
-  <title>Dashboard Form</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+
 <body class="bg-light">
-
   <!-- Navbar/Header -->
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
-     <div class="container-fluid">
-        <a class="navbar-brand" href="#">ALUMNI CONNECT.</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse text-right" id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="alumni/directory.php">Alumni Directory</a></li>
-            <li class="nav-item"><a class="nav-link" href="messages/inbox.php">Messages</a></li>
-            <li class="nav-item"><a class="nav-link" href="events/list_events.php">Events</a></li>
-            <li class="nav-item"><a class="nav-link" href="career/progress.php">Career Progress</a></li>
-            <li class="nav-item"><a class="nav-link" href="resume/upload.php">Upload Resume</a></li>
-            <li class="nav-item"><a class="nav-link" href="surveys/feedback.php">Feedback</a></li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="alumni.php">
+        <img src="../assets/images/Logo (2).png" width="70" height="70">
+        <span>ALUMNI CONNECT.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse text-right" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="directory.php">View Alumni</a></li>
+          <li class="nav-item"><a class="nav-link" href="events.php">Events</a></li>
+          <li class="nav-item"><a class="nav-link" href="view_advertisements">Job Listing</a></li>
+          <li class="nav-item"><a class="nav-link" href="feedback.php">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link" href="inbox.php">Messages</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+        </ul>
       </div>
-    </nav>
-
-<div class="container">
-    <form class="d-flex" method="GET">
-      <input class="form-control me-2" name="query" type="search" placeholder="Search alumni..." aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
-
-    <h1 class="text-center my-4">Welcome to Greenfield University Alumni Tracer</h1>
-    <?php if (isset($_SESSION['user_id'])): ?>
-        <h2 class="mb-4">Hello, <?php echo $_SESSION['user_name']; ?>! 👋</h2>
-
-        <?php else: ?>
-      <?php  header("Location: ../index.php"); ?>
-    <?php endif; ?>
-</div>    
+    </div>
+  </nav>
+   
+  <div class="container my-3">
+      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a class="breadcrumb-link text-secondary link-underline link-underline-opacity-0" href="alumni.php">Go to Home</a></li>
+              <li class="breadcrumb-item breadcrumb-active" aria-current="page">Current</li>
+          </ol>
+      </nav>
+  </div>
 </body>
 </html>
  

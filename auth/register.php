@@ -8,9 +8,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $course = $_POST['course'];
     $grad_year = $_POST['graduation_year'];
+    $matric_no = $_POST['matric_no'];
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, course, graduation_year) VALUES (?, ?, ?, ?, ?, ?)");
-    if ($stmt->execute([$fname, $lname, $email, $password, $course, $grad_year])) {
+    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, course, graduation_year, matric_no) VALUES (?, ?, ?, ?, ?, ?)");
+    if ($stmt->execute([$fname, $lname, $email, $password, $course, $grad_year, $matric_no])) {
         echo "Registration successful!";
     } else {
         echo "Error registering user.";
@@ -49,6 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mb-4">
                         <label for="graduation_year" class="form-label">Graduation year <span class="text-danger">*</span></label>
                         <input class="form-control" type="number" name="graduation_year" placeholder="Graduation Year">
+                    </div>
+                    <div class="mb-4">
+                        <label for="matric_no" class="form-label">Matric Number:<span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="matric_no" placeholder="Matric Number">
                     </div>
             
                     <div class="mb-4">
