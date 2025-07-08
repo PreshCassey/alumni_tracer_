@@ -23,7 +23,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $current_location = $_POST['current_location'] ?? null;
     $job_position = $_POST['job_position'] ?? null;
     $qualification = $_POST['qualification'] ?? null;
-    $year = $_POST['year'] ?? null;
     $company = $_POST['company'] ?? null;
 
     // File uploads
@@ -51,19 +50,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($exists) {
         // Update
-        $sql = "UPDATE user_details SET dob = ?, gender = ?, contact_number = ?, hometown = ?, current_location = ?, job_position = ?, qualification = ?, year = ?, company = ?";
+        $sql = "UPDATE user_details SET dob = ?, gender = ?, contact_number = ?, hometown = ?, current_location = ?, job_position = ?, qualification = ?, company = ?";
 
         if ($profile_image) $sql .= ", profile_image = '$profile_image'";
         if ($resume) $sql .= ", resume = '$resume'";
         
         $sql .= " WHERE user_id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$dob, $gender, $contact_number, $hometown, $current_location, $job_position, $qualification, $year, $company, $user_id]);
+        $stmt->execute([$dob, $gender, $contact_number, $hometown, $current_location, $job_position, $qualification, $company, $user_id]);
     } else {
         // Insert
-        $stmt = $conn->prepare("INSERT INTO user_details (user_id, dob, gender, contact_number, hometown, current_location, job_position, qualification, year, company, profile_image, resume)
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$user_id, $dob, $gender, $contact_number, $hometown, $current_location, $job_position, $qualification, $year, $company, $profile_image, $resume]);
+        $stmt = $conn->prepare("INSERT INTO user_details (user_id, dob, gender, contact_number, hometown, current_location, job_position, qualification, company, profile_image, resume)
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$user_id, $dob, $gender, $contact_number, $hometown, $current_location, $job_position, $qualification, $company, $profile_image, $resume]);
     }
 
     echo "<div class='alert alert-success'>Profile updated successfully.</div>";
@@ -73,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $stmt = $conn->prepare("
     SELECT u.id, u.first_name, u.last_name, u.email, u.graduation_year, u.matric_no, u.course, u.created_at,
            d.dob, d.gender, d.contact_number, d.hometown, d.current_location, d.profile_image, 
-           d.job_position, d.qualification, d.year, d.company, d.resume
+           d.job_position, d.qualification, d.company, d.resume
     FROM users u
     LEFT JOIN user_details d ON u.id = d.user_id
     WHERE u.id = ?
@@ -151,10 +150,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                 <label>Qualification:</label>
                 <input type="text" name="qualification" class="form-control" value="<?= $user['qualification'] ?>">
             </div>
-            <div class="col-md-6 mb-3">
-                <label>Graduation Year:</label>
-                <input type="text" name="year" class="form-control" value="<?= $user['year'] ?>">
-            </div>
 
             <div class="col-md-6 mb-3">
                 <label>Company:</label>
@@ -171,14 +166,32 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             <div class="col-md-12 mb-3">
                 <label>Upload Resume (PDF):</label><br>
                 <?php if ($user['resume']) { ?>
-                    <a href="../uploads/<?= $user['resume'] ?>" target="_blank">View Resume</a><br>
+                    <a class="nav-link" href="../uploads/<?= $user['resume'] ?>" target="_blank">View Resume</a><br>
                 <?php } ?>
                 <input type="file" name="resume" class="form-control">
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <button type="submit" class="btn btn-success">Update Profile</button>
     </form>
 </div>
+
+  <div class="container py-5">
+    <h3 class="mb-4">🔐 Privacy & Security</h3>
+    <form>
+      <div class="form-check form-switch mb-3">
+        <input class="form-check-input" type="checkbox" id="twoFA" checked>
+        <label class="form-check-label" for="twoFA">Enable Two-Factor Authentication</label>
+      </div>
+      <div class="mb-3">
+        <label for="privacy" class="form-label">Who can view your profile?</label>
+        <select class="form-select" id="privacy">
+          <option>Only Alumni</option>
+          <option>Private</option>
+        </select>
+      </div>
+      <button class="btn btn-success">Save Settings</button>
+    </form>
+  </div>
 
 <?php include '../includes/footer.php'; ?>

@@ -26,7 +26,7 @@
                   <h5 class="card-title">View Profile</h5>
                   <p class="card-text">Highlight your latest professional achievements and relevant skills</p>
               </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-primary fw-medium py-2" href="profile.php">View Profile</a> </div>
+              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="profile.php">View Profile</a> </div>
           </div>
         </div>
 
@@ -38,7 +38,7 @@
                   <h5 class="card-title">Alumni Friends</h5>
                   <p class="card-text">Expand your network. Reconnect with your alma mater</p>
               </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-primary fw-medium py-2" href="view_alumni.php">View Alumni</a> </div>
+              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="view_alumni.php">View Alumni</a> </div>
           </div>
       </div>
 
@@ -50,7 +50,7 @@
                   <h5 class="card-title">Events/News</h5>
                   <p class="card-text">Keep an eye out below for our evolving list of events</p>
               </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-primary fw-medium py-2" href="events.php">View News/Events</a> </div>
+              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="events.php">View News/Events</a> </div>
           </div>
       </div>
 
@@ -62,7 +62,7 @@
                   <h5 class="card-title">Advertisements</h5>
                   <p class="card-text">Access exclusive job listings, workshops, seminars to nurture your professional growth</p>
               </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-primary fw-medium py-2" href="view_advertisements.php">View Advertisements</a> </div>
+              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="view_advertisements.php">View Advertisements</a> </div>
           </div>
       </div>
 

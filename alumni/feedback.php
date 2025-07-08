@@ -58,8 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 
-<div class="main-content-inner">
-
   <div class="container mt-4 mb-5">
       <div class="row">
         <div class="col-md-6">
@@ -100,19 +98,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <label for="file" class="form-label">Upload File (Optional):</label>
                   <input type="file" class="form-control" id="file" name="file">
                 </div>
-                <button type="submit" class="btn btn-info">Send Message</button>
+                <button type="submit" class="btn btn-success">Send Message</button>
               </form>
             </div>
           </div>
         </div>
       </div>
     </div>
+     <div class="container py-5">
+    <h3 class="mb-4">📋 Alumni Feedback Survey</h3>
+    <form>
+      <div class="mb-3">
+        <label for="q1" class="form-label">How satisfied are you with the platform?</label>
+        <select class="form-select" id="q1">
+          <option>Very Satisfied</option>
+          <option>Satisfied</option>
+          <option>Neutral</option>
+          <option>Dissatisfied</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="q2" class="form-label">Suggestions for improvement:</label>
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-success">Submit Feedback</button>
+    </form>
+  </div>
 
 
     </div>
 
   </div>
 
-</div>
-</div
 <?php include('../includes/footer.php');?>

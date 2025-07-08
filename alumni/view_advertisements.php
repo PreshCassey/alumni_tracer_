@@ -78,7 +78,7 @@ $jobs = $stmt->fetchAll();
       </select>
     </div>
     <div class="col-md-4">
-      <button class="btn btn-primary">Filter</button>
+      <button class="btn btn-success">Filter</button>
       <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addJobModal" type="button">Add Job</button>
     </div>
   </form>
@@ -87,14 +87,14 @@ $jobs = $stmt->fetchAll();
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="../uploads/<?= htmlspecialchars($job['photo']) ?>" class="img-fluid rounded-start" alt="Ad Image">
+          <img src="../uploads/<?= htmlspecialchars($job['photo']) ?>" class="img-fluid rounded-start thumbnail" alt="Ad Image">
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($job['title']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($job['description']) ?></p>
             <p class="card-text"><small class="text-muted">Category: <?= htmlspecialchars($job['category']) ?> | Status: <?= htmlspecialchars($job['status']) ?></small></p>
-            <a href="<?= htmlspecialchars($job['button_link']) ?>" class="btn btn-outline-primary"><?= htmlspecialchars($job['button_message']) ?></a>
+            <a href="<?= htmlspecialchars($job['button_link']) ?>" class="btn btn-outline-success"><?= htmlspecialchars($job['button_message']) ?></a>
             <?php if ($job['appliable']): ?>
               <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#applyModal<?= $job['id'] ?>">Apply</button>
             <?php endif; ?>
@@ -178,7 +178,7 @@ $jobs = $stmt->fetchAll();
           </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" name="add_job" class="btn btn-primary">Post Advertisement</button>
+          <button type="submit" name="add_job" class="btn btn-success">Post Advertisement</button>
         </div>
       </form>
     </div>

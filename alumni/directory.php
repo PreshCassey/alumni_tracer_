@@ -71,10 +71,63 @@ $alumni = $stmt->fetchAll();
             <img src="../uploads/<?= $alum['profile_image'] ?: 'default.png' ?>" alt="Profile" class="rounded-circle me-3" width="70" height="70">
             <div class="flex-grow-1">
               <h5 class="mb-1"><?= htmlspecialchars($alum['first_name'] . ' ' . $alum['last_name']) ?></h5>
+              <p class="mb-1">Course: <?= htmlspecialchars($alum['course']) ?></p>
               <p class="mb-0">Class of <?= htmlspecialchars($alum['graduation_year']) ?> | <?= htmlspecialchars($alum['course']) ?></p>
               <small class="text-muted"><?= htmlspecialchars($alum['job_position']) ?> at <?= htmlspecialchars($alum['company']) ?></small>
             </div>
-            <a href="message.php?user_id=<?= $alum['id'] ?>" class="btn btn-outline-primary ms-3">Message</a>
+            <a href="inbox.php?chat_with=<?= $alum['id'] ?>" class="btn btn-outline-success ms-3">Message</a>
+          </div>
+          <button class="btn btn-outline-success mt-2" data-bs-toggle="modal" data-bs-target="#alumniModal<?= $alum['id'] ?>">View Profile</button>
+        </div>
+      </div>
+
+            <!-- Modal -->
+      <div class="modal fade" id="alumniModal<?= $alumnus['id'] ?>" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Alumni Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <?php
+                $detailStmt = $conn->prepare("SELECT * FROM users u LEFT JOIN user_details ud ON u.id = ud.user_id WHERE u.id = ?");
+                $detailStmt->execute([$alumnus['id']]);
+                $detail = $detailStmt->fetch();
+              ?>
+              <div class="row">
+                <div class="col-md-4 text-center">
+                  <img src="../uploads/<?= $detail['profile_image'] ?: 'default.png' ?>" class="rounded-circle mb-3" width="120" height="120" alt="Profile">
+                  <h5><?= htmlspecialchars($detail['first_name'] . ' ' . $detail['last_name']) ?></h5>
+                  <p class="text-muted">Matric No: <?= htmlspecialchars($detail['matric_no']) ?></p>
+                  <p>Email: <?= htmlspecialchars($detail['email']) ?></p>
+                </div>
+                <div class="col-md-8">
+                  <ul class="list-group">
+                    <li class="list-group-item"><strong>Course:</strong> <?= htmlspecialchars($detail['course']) ?></li>
+                    <li class="list-group-item"><strong>Graduation Year:</strong> <?= $detail['graduation_year'] ?></li>
+                    <li class="list-group-item"><strong>Date of Birth:</strong> <?= $detail['dob'] ?></li>
+                    <li class="list-group-item"><strong>Gender:</strong> <?= $detail['gender'] ?></li>
+                    <li class="list-group-item"><strong>Phone:</strong> <?= $detail['contact_number'] ?></li>
+                    <li class="list-group-item"><strong>Home Town:</strong> <?= $detail['hometown'] ?></li>
+                    <li class="list-group-item"><strong>Current Location:</strong> <?= $detail['current_location'] ?></li>
+                    <li class="list-group-item"><strong>Job Position:</strong> <?= $detail['job_position'] ?></li>
+                    <li class="list-group-item"><strong>Company:</strong> <?= $detail['company'] ?></li>
+                    <li class="list-group-item"><strong>Qualification:</strong> <?= $detail['qualification'] ?></li>
+                    <li class="list-group-item"><strong>Resume:</strong> 
+                      <?php if ($detail['resume']): ?>
+                        <a href="../uploads/<?= $detail['resume'] ?>" target="_blank">View Resume</a>
+                      <?php else: ?>
+                        Not uploaded
+                      <?php endif; ?>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>
@@ -90,6 +143,13 @@ $alumni = $stmt->fetchAll();
       <?php endfor; ?>
     </ul>
   </nav>
+
 </div>
 
 <?php include '../includes/footer.php'; ?>
+
+
+<?php
+
+
+

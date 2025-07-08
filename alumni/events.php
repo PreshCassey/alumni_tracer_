@@ -91,7 +91,7 @@ $pages = ceil($total / $limit);
       </select>
     </div>
     <div class="col-md-3">
-      <button type="submit" class="btn btn-primary">Filter</button>
+      <button type="submit" class="btn btn-success">Filter</button>
       <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addEventModal">Add Event</button>
     </div>
   </form>
@@ -107,7 +107,7 @@ $pages = ceil($total / $limit);
             <h5 class="card-title"><?= htmlspecialchars($event['title']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($event['description']) ?></p>
             <p class="card-text"><small class="text-muted">Location: <?= htmlspecialchars($event['location']) ?> | Date: <?= $event['event_date'] ?></small></p>
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#registerModal<?= $event['id'] ?>">Register</button>
+            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#registerModal<?= $event['id'] ?>">Register</button>
           </div>
         </div>
       </div>
@@ -184,7 +184,7 @@ $pages = ceil($total / $limit);
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" name="add_event" class="btn btn-primary">Save Event</button>
+          <button type="submit" name="add_event" class="btn btn-success">Save Event</button>
         </div>
       </form>
     </div>

@@ -28,22 +28,22 @@ if (isset($_GET['query'])) {
 
 <body class="bg-light">
   <!-- Navbar/Header -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed mb-4">
     <div class="container-fluid">
       <a class="navbar-brand" href="alumni.php">
         <img src="../assets/images/Logo (2).png" width="70" height="70">
-        <span>ALUMNI CONNECT.</span></a>
+        <span class="">ALUMNI CONNECT.</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse text-right" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="directory.php">View Alumni</a></li>
-          <li class="nav-item"><a class="nav-link" href="events.php">Events</a></li>
-          <li class="nav-item"><a class="nav-link" href="view_advertisements.php">Job Listing</a></li>
-          <li class="nav-item"><a class="nav-link" href="feedback.php">Feedback</a></li>
-          <li class="nav-item"><a class="nav-link" href="inbox.php">Messages</a></li>
-          <li class="nav-item"><a class="nav-link" href="profile.php">Profile</a></li>
+          <li class="nav-item"><a class="nav-link " href="directory.php">View Alumni</a></li>
+          <li class="nav-item"><a class="nav-link " href="events.php">Events</a></li>
+          <li class="nav-item"><a class="nav-link " href="view_advertisements.php">Job</a></li>
+          <li class="nav-item"><a class="nav-link " href="feedback.php">Feedback</a></li>
+          <li class="nav-item"><a class="nav-link " href="inbox.php">Messages</a></li>
+          <li class="nav-item"><a class="nav-link " href="profile.php">Profile</a></li>
         </ul>
       </div>
     </div>

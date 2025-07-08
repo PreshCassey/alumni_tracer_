@@ -6,12 +6,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lname = $_POST['last_name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $course = $_POST['course'];
     $grad_year = $_POST['graduation_year'];
     $matric_no = $_POST['matric_no'];
+    $course = $_POST['course'];
 
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, course, graduation_year, matric_no) VALUES (?, ?, ?, ?, ?, ?)");
-    if ($stmt->execute([$fname, $lname, $email, $password, $course, $grad_year, $matric_no])) {
+
+    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, graduation_year, matric_no, course) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    if ($stmt->execute([$fname, $lname, $email, $password, $grad_year, $matric_no, $course])) {
         echo "Registration successful!";
     } else {
         echo "Error registering user.";
