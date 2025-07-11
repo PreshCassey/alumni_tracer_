@@ -1,5 +1,13 @@
 <?php include '../includes/header.php' ?>
+<?php
+if (!isset($_SESSION['user_id'])) {
+    echo "<div class='alert alert-danger'>Please log in.</div>";
+    include '../includes/footer.php';
+    exit();
+}
+?>
 <div class="container">
+  
     <p class="text-center my-4 display-4">Welcome to Greenfield University Alumni Connect</p>
     <form class="d-flex my-4" method="GET">
       <input class="form-control me-2" name="query" type="search" placeholder="Search by name" aria-label="Search">

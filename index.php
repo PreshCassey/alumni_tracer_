@@ -42,7 +42,7 @@
     <div class="container p-5">
       <h1 class="display-4">Alumni Connect: Building Lifelong Networks</h1>
       <p class="lead">Reignite connections, explore new opportunities, and contribute to a thriving alumni community.</p>
-      <a href="#" class="btn btn-success btn-lg m-2"><i class="bi bi-person-plus"></i> Join the Network</a>
+      <a href="auth/register.php" class="btn btn-success btn-lg m-2"><i class="bi bi-person-plus"></i> Join the Network</a>
       <a href="#" class="btn btn-outline-success btn-lg m-2"><i class="bi bi-journal-richtext"></i> Explore Alumni Stories</a>
     </div>
   </section>

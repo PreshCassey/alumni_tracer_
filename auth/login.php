@@ -30,6 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <div class="container py-5 my-5">
+          <a class="navbar-brand" href="index.php">
+          <img src="../assets/images/Logo (2).png" alt="" srcset="" width="50" height="50">
+          <span class="text-success font-weight-bold">ALUMNI CONNECT</span>
+        </a>
     <div class="row justify-content-center">
       <div class="col-md-6 col-lg-5">
         <div class="card shadow p-4">

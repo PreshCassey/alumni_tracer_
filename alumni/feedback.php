@@ -2,6 +2,12 @@
 include '../includes/header.php';
 require '../config/database.php';
 
+if (!isset($_SESSION['user_id'])) {
+    echo "<div class='alert alert-danger'>Please log in.</div>";
+    include '../includes/footer.php';
+    exit();
+}
+
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars($_POST['name']);
@@ -11,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Define the recipient email
     $to = "preciouscasmir04@gmail.com";
-    $subject = "Votcas support contact form";
+    $subject = "Alumni support contact form";
     
     // Create the email headers
     $headers = "From: " . $email . "\r\n";
@@ -110,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <form>
       <div class="mb-3">
         <label for="q1" class="form-label">How satisfied are you with the platform?</label>
-        <select class="form-select" id="q1">
+        <select class="form-select form-control" id="q1">
           <option>Very Satisfied</option>
           <option>Satisfied</option>
           <option>Neutral</option>

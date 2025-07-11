@@ -6,6 +6,11 @@ require '../config/database.php';
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+if (!isset($_SESSION['user_id'])) {
+    echo "<div class='alert alert-danger'>Please log in.</div>";
+    include '../includes/footer.php';
+    exit();
+}
 
 // Add Job/Advertisement
 if (isset($_POST['add_job'])) {
@@ -17,14 +22,19 @@ if (isset($_POST['add_job'])) {
     $status = $_POST['status'];
     $appliable = isset($_POST['appliable']) ? 1 : 0;
     $date_to_hide = $_POST['date_to_hide'];
-    $advertiser = $_SESSION['user_id']; // or replace with a form input
+    $advertiser = $_SESSION['advertiser']; 
+    $posted_by = $_SESSION['user_id']; 
     $photo = $_FILES['photo']['name'];
 
     $target = '../uploads/' . basename($photo);
     if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
-        $stmt = $conn->prepare("INSERT INTO advertisement (title, description, date_added, button_message, button_link, photo, category, status, advertiser, appliable, date_to_hide) VALUES (?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$title, $description, $button_message, $button_link, $photo, $category, $status, $advertiser, $appliable, $date_to_hide]);
-    }
+        $stmt = $conn->prepare("INSERT INTO advertisement (title, description, button_message, button_link, photo, category, status, advertiser, posted_by, appliable, date_to_hide, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt->execute([$title, $description, $button_message, $button_link, $photo, $category, $status, $advertiser, $posted_by, $appliable, $date_to_hide]);
+       
+      }
+        echo "<div class='alert alert-success text-center'>Added successfully!</div>";
+
+    
 }
 
 // Apply to a job
@@ -38,7 +48,14 @@ if (isset($_POST['apply_job'])) {
     if ($check->fetchColumn() == 0) {
         $stmt = $conn->prepare("INSERT INTO job_applications (job_id, user_id, applied_at) VALUES (?, ?, NOW())");
         $stmt->execute([$job_id, $user_id]);
+    
+    echo "<div class='alert alert-success text-center'>Applied successfully!</div>";
     }
+    else{
+     echo "<div class='alert alert-danger text-center'>Applied already!</div>";
+
+    }
+
 }
 
 // Filters
@@ -58,7 +75,7 @@ if (!empty($status)) {
 }
 
 // Fetch Jobs
-$stmt = $conn->prepare("SELECT * FROM advertisement $where ORDER BY date_added DESC");
+$stmt = $conn->prepare("SELECT * FROM advertisement $where ORDER BY created_at DESC");
 $stmt->execute($params);
 $jobs = $stmt->fetchAll();
 ?>
@@ -71,7 +88,7 @@ $jobs = $stmt->fetchAll();
       <input type="text" name="category" class="form-control" placeholder="Category" value="<?= htmlspecialchars($category) ?>">
     </div>
     <div class="col-md-4">
-      <select name="status" class="form-select">
+      <select name="status" class="form-select form-control">
         <option value="">All Status</option>
         <option value="Active" <?= $status == 'Active' ? 'selected' : '' ?>>Active</option>
         <option value="Closed" <?= $status == 'Closed' ? 'selected' : '' ?>>Closed</option>
@@ -80,6 +97,7 @@ $jobs = $stmt->fetchAll();
     <div class="col-md-4">
       <button class="btn btn-success">Filter</button>
       <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addJobModal" type="button">Add Job</button>
+      <a href="job_added.php" type="button" role="button" class="btn btn-success ms-2">Job Added</a>
     </div>
   </form>
 
@@ -87,12 +105,13 @@ $jobs = $stmt->fetchAll();
     <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
-          <img src="../uploads/<?= htmlspecialchars($job['photo']) ?>" class="img-fluid rounded-start thumbnail" alt="Ad Image">
+          <img src="../uploads/<?= htmlspecialchars($job['photo']) ?>" class="img-fluid rounded-circle thumbnail m-3" alt="Ad Image" width="250" height="250">
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($job['title']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($job['description']) ?></p>
+            <b class="card-text">Advertiser: <?= htmlspecialchars($job['advertiser']) ?></b>
             <p class="card-text"><small class="text-muted">Category: <?= htmlspecialchars($job['category']) ?> | Status: <?= htmlspecialchars($job['status']) ?></small></p>
             <a href="<?= htmlspecialchars($job['button_link']) ?>" class="btn btn-outline-success"><?= htmlspecialchars($job['button_message']) ?></a>
             <?php if ($job['appliable']): ?>
@@ -101,7 +120,7 @@ $jobs = $stmt->fetchAll();
           </div>
         </div>
       </div>
-    </div>
+     </div>
 
     <!-- Apply Modal -->
     <div class="modal fade" id="applyModal<?= $job['id'] ?>" tabindex="-1" aria-labelledby="applyModalLabel<?= $job['id'] ?>" aria-hidden="true">
@@ -145,6 +164,10 @@ $jobs = $stmt->fetchAll();
             <label class="form-label">Description</label>
             <textarea name="description" rows="4" class="form-control" required></textarea>
           </div>
+          <div class="col-md-12">
+            <label class="form-label">Advertiser name</label>
+            <textarea name="advertiser" rows="4" class="form-control" required></textarea>
+          </div>
           <div class="col-md-6">
             <label class="form-label">Button Message</label>
             <input type="text" name="button_message" class="form-control" required>
@@ -172,7 +195,7 @@ $jobs = $stmt->fetchAll();
             <div class="form-check">
               <input class="form-check-input" type="checkbox" name="appliable" value="1" id="appliableCheck">
               <label class="form-check-label" for="appliableCheck">
-                Can users apply?
+                Can users apply on this portal?
               </label>
             </div>
           </div>

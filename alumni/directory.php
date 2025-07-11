@@ -1,6 +1,12 @@
 <?php
 include '../includes/header.php';
 
+if (!isset($_SESSION['user_id'])) {
+    echo "<div class='alert alert-danger'>Please log in.</div>";
+    include '../includes/footer.php';
+    exit();
+}
+
 // Pagination setup
 $limit = 10;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -82,7 +88,7 @@ $alumni = $stmt->fetchAll();
       </div>
 
             <!-- Modal -->
-      <div class="modal fade" id="alumniModal<?= $alumnus['id'] ?>" tabindex="-1" aria-hidden="true">
+      <div class="modal fade" id="alumniModal<?= $alum['id'] ?>" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
           <div class="modal-content">
             <div class="modal-header">
@@ -92,7 +98,7 @@ $alumni = $stmt->fetchAll();
             <div class="modal-body">
               <?php
                 $detailStmt = $conn->prepare("SELECT * FROM users u LEFT JOIN user_details ud ON u.id = ud.user_id WHERE u.id = ?");
-                $detailStmt->execute([$alumnus['id']]);
+                $detailStmt->execute([$alum['id']]);
                 $detail = $detailStmt->fetch();
               ?>
               <div class="row">

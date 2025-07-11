@@ -7,6 +7,13 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+if (!isset($_SESSION['user_id'])) {
+    echo "<div class='alert alert-danger'>Please log in.</div>";
+    include '../includes/footer.php';
+    exit();
+}
+
+
 // Add Event logic
 if (isset($_POST['add_event'])) {
     $title = trim($_POST['title']);
@@ -20,6 +27,8 @@ if (isset($_POST['add_event'])) {
     if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
         $stmt = $conn->prepare("INSERT INTO events (title, location, description, event_date, type, photo) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->execute([$title, $location, $description, $event_date, $type, $photo]);
+
+        echo "<div class='alert alert-success text-center'>Added successfully!</div>";
     }
 }
 
@@ -34,10 +43,17 @@ if (isset($_POST['register_event'])) {
         if ($checkStmt->fetchColumn() == 0) {
             $stmt = $conn->prepare("INSERT INTO event_reg (event_id, user_id) VALUES (?, ?)");
             $stmt->execute([$event_id, $user_id]);
+
+            echo "<div class='alert alert-success text-center'>Registered successfully!</div>";
         }
+         else{
+           echo "<div class='alert alert-danger text-center'>Registered already!</div>";
+
+        }
+
+
     }
 }
-
 // Pagination & Filters
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -83,7 +99,7 @@ $pages = ceil($total / $limit);
       <input type="text" name="location" class="form-control" placeholder="Location" value="<?= htmlspecialchars($filterLocation) ?>">
     </div>
     <div class="col-md-3">
-      <select name="type" class="form-select">
+      <select name="type" class="form-select form-control">
         <option value="">All Types</option>
         <option value="Conference" <?= $filterType == 'Conference' ? 'selected' : '' ?>>Conference</option>
         <option value="Workshop" <?= $filterType == 'Workshop' ? 'selected' : '' ?>>Workshop</option>
@@ -92,17 +108,18 @@ $pages = ceil($total / $limit);
     </div>
     <div class="col-md-3">
       <button type="submit" class="btn btn-success">Filter</button>
-      <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addEventModal">Add Event</button>
+      <button type="button" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#addEventModal">+ Event</button>
+      <a role="button" href="event_added.php" class="btn btn-success ms-2">Events</a>
     </div>
   </form>
 
   <?php foreach ($events as $event): ?>
     <div class="card mb-3">
       <div class="row g-0">
-        <div class="col-md-4">
-          <img src="../uploads/<?= htmlspecialchars($event['photo']) ?>" class="img-fluid rounded-start" alt="Event Photo">
+        <div class="col-md-3">
+          <img src="../uploads/<?= htmlspecialchars($event['photo']) ?>" class="img-fluid rounded-circle my-5 ml-5" alt="Event Photo" width="200" height="200">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-9">
           <div class="card-body">
             <h5 class="card-title"><?= htmlspecialchars($event['title']) ?></h5>
             <p class="card-text"><?= htmlspecialchars($event['description']) ?></p>
