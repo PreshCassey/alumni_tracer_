@@ -29,7 +29,7 @@ if (!isset($_SESSION['user_id'])) {
       <!-- Profile Section -->
         <div class="col-md-6 mb-4">
             <div class="card shadow-sm p-3">
-              <img src="../assets/images/profile_picture.jpg" class="card-img-top" alt="Profile Picture">
+              <img src="../assets/images/profile_picture.jpg" class="card-img-top" alt="Profile Picture" height="250" width="250">
               <div class="card-body">
                   <h5 class="card-title">View Profile</h5>
                   <p class="card-text">Highlight your latest professional achievements and relevant skills</p>
@@ -38,22 +38,10 @@ if (!isset($_SESSION['user_id'])) {
           </div>
         </div>
 
-      <!-- Alumni Friends -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm p-3">
-              <img src="../assets/images/social_image.jpg" class="card-img-top" alt="Social Image">
-              <div class="card-body">
-                  <h5 class="card-title">Alumni Friends</h5>
-                  <p class="card-text">Expand your network. Reconnect with your alma mater</p>
-              </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="view_alumni.php">View Alumni</a> </div>
-          </div>
-      </div>
-
       <!-- Events/News -->
       <div class="col-md-6 mb-4">
         <div class="card shadow-sm p-3">
-              <img src="../assets/images/social_event.jpg" class="card-img-top" alt="Social Event">
+              <img src="../assets/images/social_event.jpg" class="card-img-top" alt="Social Event" height="250" width="250">
               <div class="card-body">
                   <h5 class="card-title">Events/News</h5>
                   <p class="card-text">Keep an eye out below for our evolving list of events</p>
@@ -62,10 +50,22 @@ if (!isset($_SESSION['user_id'])) {
           </div>
       </div>
 
+            <!-- Alumni Friends -->
+      <div class="col-md-6 mb-4">
+        <div class="card shadow-sm p-3">
+              <img src="../assets/images/social_image.jpg" class="card-img-top" alt="Social Image" height="250" width="250">
+              <div class="card-body">
+                  <h5 class="card-title">Alumni Friends</h5>
+                  <p class="card-text">Expand your network. Reconnect with your alma mater</p>
+              </div>
+              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="view_alumni.php">View Alumni</a> </div>
+          </div>
+      </div>
+
       <!-- Advertisements -->
       <div class="col-md-6 mb-4">
         <div class="card shadow-sm p-3">
-              <img src="../assets/images/advertisement_photo.jpeg" class="card-img-top" alt="Advertisement Photo">
+              <img src="../assets/images/advertisement_photo.jpeg" class="card-img-top" alt="Advertisement Photo" height="250" width="250">
               <div class="card-body">
                   <h5 class="card-title">Advertisements</h5>
                   <p class="card-text">Access exclusive job listings, workshops, seminars to nurture your professional growth</p>
