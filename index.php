@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Tracer</title>
+    <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
@@ -38,12 +39,12 @@
   </header>
 
  <!-- Hero Section -->
-  <section class="text-white bg-hero text-center pt-5 p-5">
+  <section class="text-white bg-hero img-fluid text-center pt-5 p-5">
     <div class="container p-5">
       <h1 class="display-4">Alumni Connect: Building Lifelong Networks</h1>
       <p class="lead">Reignite connections, explore new opportunities, and contribute to a thriving alumni community.</p>
       <a href="auth/register.php" class="btn btn-success btn-lg m-2"><i class="bi bi-person-plus"></i> Join the Network</a>
-      <a href="#" class="btn btn-outline-success btn-lg m-2"><i class="bi bi-journal-richtext"></i> Explore Alumni Stories</a>
+      <!-- <a href="#" class="btn btn-outline-success btn-lg m-2"><i class="bi bi-journal-richtext"></i> Explore Alumni Stories</a> -->
     </div>
   </section>
 
@@ -67,7 +68,7 @@
       <div class="row g-4">
         <div class="col-md-6 col-lg-3">
           <div class="card h-100">
-            <img src="./assets/images/write.jpg" class="card-img-top" alt="Profile">
+            <img src="./assets/images/showcasex.jpg" class="card-img-top" alt="Profile" width="200" height="200">
             <div class="card-body">
               <h5 class="card-title">Showcase Your Expertise</h5>
               <p>Create a digital profile with your career history and skills. Connect, control privacy, and get verified.</p>
@@ -76,28 +77,29 @@
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="card h-100">
-            <img src="./assets/images/advertisement_photo.jpeg" class="card-img-top" alt="Job Board">
+            <img src="./assets/images/job.jpg" class="card-img-top" alt="Job Board" width="200" height="200">
             <div class="card-body">
-              <h5 class="card-title">Job Board</h5>
+              <h5 class="card-title">Job Board/Advertisment</h5>
               <p>Find exclusive job postings tailored for alumni, covering a range of industries and experience levels.</p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="card h-100">
-            <img src="./assets/images/advertisement_photo.jpeg" class="card-img-top" alt="Mentorship">
+            <img src="./assets/images/mentorsh.jpg" class="card-img-top" alt="Mentorship">
             <div class="card-body">
-              <h5 class="card-title">Mentorship Program</h5>
-              <p>Get matched with experienced alumni for career guidance and personal development support.</p>
+              <h5 class="card-title">Events</h5>
+              <p>Find Exicting Alumni Events, Find Meetup events, connect with friends and like-minded people. 
+                Meet people near you who share your interests.</p>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
           <div class="card h-100">
-            <img src="./assets/images/default_events.jpg" class="card-img-top" alt="Development">
+            <img src="./assets/images/alumnfr.jpg" class="card-img-top" alt="Development">
             <div class="card-body">
-              <h5 class="card-title">Professional Development</h5>
-              <p>Attend workshops and seminars to enhance your skills and stay ahead in your field.</p>
+              <h5 class="card-title">Alumni</h5>
+              <p>Find and connect with Alumni all over the world.</p>
             </div>
           </div>
         </div>
@@ -111,7 +113,7 @@
       <h2 class="text-success">Featured Alumnus Spotlight</h2>
       <p class="lead">Inspiring Journey of Innovation</p>
       <img src="./assets/images/matric.jpeg" class="img-fluid rounded my-3" alt="Alumnus Story">
-      <p>Discover success narratives of our accomplished alumni. Read stories of career growth, cross-industry collaboration, and their lasting impact.</p>
+      <p class="text-muted">set ~ 2021-2025</p>
     </div>
   </section>
 
@@ -151,26 +153,114 @@
     </div>
   </section>
 
-  <!-- Give Back Section -->
-  <section class="py-5">
-    <div class="container text-center">
-      <h2 class="text-success">Give Back Programs</h2>
-      <p class="lead">Support the next generation of leaders.</p>
-      <p>Contribute to scholarships, mentor students, or lead a professional workshop. Every donation helps strengthen our community.</p>
-      <a href="#" class="btn btn-success px-5 mt-3">Support Now</a>
+  <section>
+    <!-- Alumni Stories Section -->
+    <div class="container my-5">
+      <h2 class="text-center mb-2 text-success fw-bold">Alumni Stories</h2>
+      <p class="text-center mb-5 fw-bold">Discover success narratives of our accomplished alumni. Read stories of career growth, cross-industry collaboration, and their lasting impact.</p>
+
+
+      <div id="alumniStoriesCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Indicators -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#alumniStoriesCarousel" data-bs-slide-to="0" class="active"></button>
+          <button type="button" data-bs-target="#alumniStoriesCarousel" data-bs-slide-to="1"></button>
+          <button type="button" data-bs-target="#alumniStoriesCarousel" data-bs-slide-to="2"></button>
+          <button type="button" data-bs-target="#alumniStoriesCarousel" data-bs-slide-to="3"></button>
+        </div>
+
+        <!-- Carousel Items -->
+        <div class="carousel-inner">
+          <!-- Story 1 -->
+          <div class="carousel-item active">
+            <div class="row justify-content-center align-items-center text-center">
+              <div class="col-md-4">
+                <img src="./assets/images/pip.jpg" class="rounded-circle img-fluid" alt="Alumni 1">
+              </div>
+              <div class="col-md-6">
+                <h4 class="text-success">Praise Peter Ayuba</h4>
+                <small class="text-muted">Class of 2025 – Cyber Security</small>
+                <p class="mt-3">
+                  "Greenfield University gave me more than a degree, it gave me growth, lifelong friendships, and a clear sense of purpose. From unforgettable campus moments to building my final year alumni tracer application, every experience shaped who I am today.
+                <br>
+                As an alumna, I believe our journey doesn’t end at graduation. It’s the start of giving back, staying connected, and creating opportunities for one another. This is my story, and it will always be part of the Greenfield story."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="carousel-item">
+            <div class="row justify-content-center align-items-center text-center">
+              <div class="col-md-4">
+                <img src="./assets/images/Phil.jpg" class="rounded-circle img-fluid" alt="Alumni 2">
+              </div>
+              <div class="col-md-6">
+                <h4 class="text-success">Philemon Oluwadamilola Agbor</h4>
+                <small class="text-muted">Class of 2025 – Infomation Technology</small>
+                <p class="mt-3">
+                  "I’m Philemon OluwaDamilola Agbor, a proud graduate of Greenfield University and a member of GFU 21 Class of 2025, with a degree in Information Technology.From my humble beginnings in 100lvl as a Fresher to my 400lvl Final year,my journey at Greenfield University was one of growth, resilience, and purpose. Every challenge became a lesson, every success a reminder that dreams are worth chasing. As an Alumni, I believe our journey doesn’t end at graduation, I have cemented my name as one of the best Graduating students in my set and as one of the best students that has passed through Greenfield University.
+            This is my story and I will always be part of the growth of this University!"
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story 3 -->
+          <div class="carousel-item">
+            <div class="row justify-content-center align-items-center text-center">
+              <div class="col-md-4">
+                <img src="./assets/images/me.jpg" class="rounded-circle img-fluid" alt="Alumni 3">
+              </div>
+              <div class="col-md-6">
+                <h4 class="text-success">Casmir Precious Amarachi</h4>
+                <small class="text-muted">Class of 2025 – Info Technology</small>
+                <p class="mt-3">
+                 "University was more than lectures and exams, it was where I discovered who I am. I learned resilience in the face of challenges, found friends who became family, and built dreams that still guide me today."
+                </p>
+              </div>
+            </div>
+          </div>
+
+          
+          <!-- Story 4 -->
+          <div class="carousel-item">
+            <div class="row justify-content-center align-items-center text-center">
+              <div class="col-md-4">
+                <img src="./assets/images/me.jpg" class="rounded-circle img-fluid" alt="Alumni 3">
+              </div>
+              <div class="col-md-6">
+                <h4 class="text-success">Casmir Precious Amarachi</h4>
+                <small class="text-muted">Class of 2025 – Info Technology</small>
+                <p class="mt-3">
+                 "University was more than lectures and exams, it was where I discovered who I am. I learned resilience in the face of challenges, found friends who became family, and built dreams that still guide me today."
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#alumniStoriesCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon bg-success rounded-circle p-2"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#alumniStoriesCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon bg-success rounded-circle p-2"></span>
+        </button>
+      </div>
     </div>
   </section>
 
-  <!-- Connect Section -->
+  <!-- Give Back Section -->
   <section class="bg-success text-white text-center py-5">
-    <div class="container">
-      <h2>Connect and Grow</h2>
-      <ul class="list-unstyled lead">
-        <li><i class="bi bi-instagram me-2"></i>Social Media Integration</li>
-        <li><i class="bi bi-phone me-2"></i>Mobile App Features</li>
-      </ul>
-      <a href="#" class="btn btn-light mt-3">Download the App</a>
+    <div class="container text-center">
+      <h2 class="text-white">Give Back Programs</h2>
+      <p class="lead">Support the next generation of leaders.</p>
+      <p>Contribute to scholarships, mentor students, or lead a professional workshop. Every donation helps strengthen our community.</p>
+      <a href="#" class="btn btn-secondary px-5 mt-3">Support Now</a>
     </div>
   </section>
+
 
   <?php include 'includes/footer.php' ?>

@@ -1,96 +1,131 @@
 <?php include '../includes/header.php' ?>
 <?php
 if (!isset($_SESSION['user_id'])) {
-    echo "<div class='alert alert-danger'>Please log in.</div>";
+     echo "<div class='alert alert-danger'><a href='../auth/login.php'>Please log in.</a></div>";
     include '../includes/footer.php';
     exit();
 }
 ?>
-<div class="container">
-  
-    <p class="text-center my-4 display-4">Welcome to Greenfield University Alumni Connect</p>
-    <form class="d-flex my-4" method="GET">
-      <input class="form-control me-2" name="query" type="search" placeholder="Search by name" aria-label="Search">
-      <input class="form-control mx-2" name="query" type="search" placeholder="grad year" aria-label="Search">
-      <input class="form-control mx-2" name="query" type="search" placeholder="course" aria-label="Search">
-      <input class="form-control mx-2" name="query" type="search" placeholder="matric no" aria-label="Search">
-      <button class="btn btn-outline-success px-5 mx-3" type="submit">Search</button>
-    </form>
 
+  <style>
+    .hero {
+      background: url('../assets/images/back2.jpg') center/cover no-repeat;
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+    }
+    .hero h1 {
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+    .circle-icon {
+      background-color: #e9f6ef;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 2rem;
+    }
+  </style>
+
+<!-- Hero Section -->
+<div class="hero">
+  <div class="container">
+    <h1>Congratulations,</h1>
+    <p class="lead">and welcome to the GreenField Alumni Community!</p>
+  </div>
+</div>
+
+<div class="container py-5">
+  
     <?php if (isset($_SESSION['user_id'])): ?>
         <h2 class="mb-3 mt-4">Hello, <?php echo $_SESSION['user_name']; ?>! 👋</h2>
 
         <?php else: ?>
       <?php  header("Location: ../index.php"); ?>
     <?php endif; ?>
-</div> 
-<div class="container py-5">
-    <div class="row">
-      <!-- Profile Section -->
-        <div class="col-md-6 mb-4">
-            <div class="card shadow-sm p-3">
-              <img src="../assets/images/profile_picture.jpg" class="card-img-top" alt="Profile Picture" height="250" width="250">
-              <div class="card-body">
-                  <h5 class="card-title">View Profile</h5>
-                  <p class="card-text">Highlight your latest professional achievements and relevant skills</p>
-              </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="profile.php">View Profile</a> </div>
-          </div>
+
+
+  <div class="row g-4">
+    <!-- Alumni Directory -->
+    <div class="col-md-4">
+      <div class="card text-center p-4 card-hover">
+        <div class="circle-icon text-success mb-3">
+          🎓
         </div>
-
-      <!-- Events/News -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm p-3">
-              <img src="../assets/images/social_event.jpg" class="card-img-top" alt="Social Event" height="250" width="250">
-              <div class="card-body">
-                  <h5 class="card-title">Events/News</h5>
-                  <p class="card-text">Keep an eye out below for our evolving list of events</p>
-              </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="events.php">View News/Events</a> </div>
-          </div>
-      </div>
-
-            <!-- Alumni Friends -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm p-3">
-              <img src="../assets/images/social_image.jpg" class="card-img-top" alt="Social Image" height="250" width="250">
-              <div class="card-body">
-                  <h5 class="card-title">Alumni Friends</h5>
-                  <p class="card-text">Expand your network. Reconnect with your alma mater</p>
-              </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="view_alumni.php">View Alumni</a> </div>
-          </div>
-      </div>
-
-      <!-- Advertisements -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm p-3">
-              <img src="../assets/images/advertisement_photo.jpeg" class="card-img-top" alt="Advertisement Photo" height="250" width="250">
-              <div class="card-body">
-                  <h5 class="card-title">Advertisements</h5>
-                  <p class="card-text">Access exclusive job listings, workshops, seminars to nurture your professional growth</p>
-              </div>
-              <div class="d-grid gap-2"> <a role="button" class="btn card-btn btn-success fw-medium py-2" href="view_advertisements.php">View Advertisements</a> </div>
-          </div>
-      </div>
-
-      <!-- Messages -->
-      <div class="col-md-6 mb-4">
-        <div class="card shadow-sm p-3">
-          <h5>Messages</h5>
-          <p>Check your inbox and connect with old classmates.</p>
-          <a href="inbox.php" class="btn btn-sm btn-outline-dark">Go to Messages</a>
-        </div>
+        <h5 class="fw-bold">ALUMNI DIRECTORY</h5>
+        <p class="text-success fw-bold">Connect Across Our Community</p>
+        <a href="directory.php" class="text-decoration-none text-success fw-bold">All Alumni →</a>
       </div>
     </div>
 
+    <!-- message Calls -->
+    <div class="col-md-4">
+      <div class="card text-center p-4 card-hover">
+        <div class="mb-3">
+          📩
+        </div>
+        <h5 class="fw-bold">Messages</h5>
+        <p class="text-success fw-bold">Check your inbox and connect with old classmates.</p>
+        <a href="inbox.php" class="text-decoration-none text-success fw-bold">Go to Messages</a>
+      </div>
+    </div>
+
+    <!-- message Calls -->
+    <div class="col-md-4">
+      <div class="card text-center p-4 card-hover">
+        <div class="mb-3">
+          📃
+        </div>
+        <h5 class="fw-bold">Jobs/ Advertisment</h5>
+        <p class="text-success fw-bold">Check for job listing or advertisment</p>
+        <a href="view_advertisement.php" class="text-decoration-none text-success fw-bold">Jobs -></a>
+    </div>
+
+
+  </div>
+
+
+  <div class="row g-4">
+    <!-- Upcoming Events -->
+    <div class="col-md-4">
+      <div class="card text-center p-4 card-hover">
+        <div class="circle-icon text-success mb-3">
+          📅
+        </div>
+        <h5 class="fw-bold">UPCOMING EVENTS</h5>
+        <p class="text-muted">No event found!</p>
+        <a href="events.php" class="text-decoration-none text-success fw-bold">All Events →</a>
+      </div>
+    </div>
+
+    <!-- progile -->
+    <div class="col-md-4">
+      <div class="card text-center p-4 card-hover">
+        <div class="circle-icon text-success mb-3">
+          👥
+        </div>
+        <h5 class="fw-bold">View Profile</h5>
+        <p class="text-muted">Highlight your latest professional achievements and relevant skills</p>
+        <a href="profile.php" class="text-decoration-none text-success fw-bold">View profile →</a>
+      </div>
+    </div>
+
+  </div>
+
        <!-- Placeholder cards -->
-       <hr><br><hr>
+    <hr><br><hr>
 
     <div class="text-center mt-5">
       <a href="../auth/logout.php" class="btn btn-danger rounded-pill px-4">Logout</a>
     </div>
-  </div>
 
 
 

@@ -2,7 +2,7 @@
 include '../includes/header.php';
 
 if (!isset($_SESSION['user_id'])) {
-    echo "<div class='alert alert-danger'>Please log in.</div>";
+     echo "<div class='alert alert-danger'><a href='../auth/login.php'>Please log in.</a></div>";
     include '../includes/footer.php';
     exit();
 }
@@ -59,7 +59,7 @@ $alumni = $stmt->fetchAll();
       <input type="text" name="search" class="form-control" placeholder="Search by name" value="<?= htmlspecialchars($search) ?>">
     </div>
     <div class="col-md-3">
-      <input type="text" name="course" class="form-control" placeholder="Filter by course" value="<?= htmlspecialchars($course) ?>">
+      <input type="text" name="course" class="form-control" placeholder="Filter by Program" value="<?= htmlspecialchars($course) ?>">
     </div>
     <div class="col-md-3">
       <input type="text" name="graduation_year" class="form-control" placeholder="Graduation Year" value="<?= htmlspecialchars($grad_year) ?>">
@@ -77,8 +77,7 @@ $alumni = $stmt->fetchAll();
             <img src="../uploads/<?= $alum['profile_image'] ?: 'default.png' ?>" alt="Profile" class="rounded-circle me-3" width="70" height="70">
             <div class="flex-grow-1">
               <h5 class="mb-1"><?= htmlspecialchars($alum['first_name'] . ' ' . $alum['last_name']) ?></h5>
-              <p class="mb-1">Course: <?= htmlspecialchars($alum['course']) ?></p>
-              <p class="mb-0">Class of <?= htmlspecialchars($alum['graduation_year']) ?> | <?= htmlspecialchars($alum['course']) ?></p>
+              <p class="mb-0">Class of <?= htmlspecialchars($alum['graduation_year']) ?> | Course: <?= htmlspecialchars($alum['course']) ?></p>
               <small class="text-muted"><?= htmlspecialchars($alum['job_position']) ?> at <?= htmlspecialchars($alum['company']) ?></small>
             </div>
             <a href="inbox.php?chat_with=<?= $alum['id'] ?>" class="btn btn-outline-success ms-3">Message</a>

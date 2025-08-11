@@ -21,7 +21,7 @@ if (isset($_GET['query'])) {
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
-    <script src="../assets/css/bootstrap.min.js"></script>
+    <script src="../assets/js/bootstrap.min.js"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,36 +30,32 @@ if (isset($_GET['query'])) {
 
 <body class="bg-light">
   <!-- Navbar/Header -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed mb-4">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-success sticky-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="alumni.php">
         <img src="../assets/images/Logo (2).png" width="70" height="70">
-        <span class="">ALUMNI CONNECT.</span></a>
+        <span class="text-white">ALUMNI CONNECT.</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse text-right" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link " href="directory.php">View Alumni</a></li>
-          <li class="nav-item"><a class="nav-link " href="events.php">Events</a></li>
-          <li class="nav-item"><a class="nav-link " href="view_advertisements.php">Job</a></li>
-          <li class="nav-item"><a class="nav-link " href="feedback.php">Feedback</a></li>
-          <li class="nav-item"><a class="nav-link " href="inbox.php">Messages</a></li>
-          <li class="nav-item"><a class="nav-link " href="profile.php">Profile</a></li>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link text-white" href="alumni.php">Home</a></li>
+
+          <li class="nav-item"><a class="nav-link text-white" href="directory.php">Alumni</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="events.php">Events</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="view_advertisements.php">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="inbox.php">Messages</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="profile.php">My Account</a></li>
+          <li class="nav-item"><a class="nav-link text-white" href="feedback.php">Feedback</a></li>
+
         </ul>
         <a class="btn btn-danger btn-sm" href="../auth/logout.php">Logout</a>
       </div>
     </div>
   </nav>
    
-  <div class="container my-3">
-      <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
-          <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a class="breadcrumb-link text-secondary link-underline link-underline-opacity-0" href="alumni.php">Go to Home</a></li>
-              <li class="breadcrumb-item breadcrumb-active" aria-current="page">Current</li>
-          </ol>
-      </nav>
-  </div>
 </body>
 </html>
  

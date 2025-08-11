@@ -3,7 +3,7 @@ include '../includes/header.php';
 require '../config/database.php';
 
 if (!isset($_SESSION['user_id'])) {
-    echo "<div class='alert alert-danger'>Please log in.</div>";
+     echo "<div class='alert alert-danger'><a href='../auth/login.php'>Please log in.</a></div>";
     include '../includes/footer.php';
     exit();
 }

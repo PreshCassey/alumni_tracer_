@@ -2,17 +2,15 @@
 include '../includes/header.php';
 require '../config/database.php';
 
-// Start session if not already started
+// Start session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 if (!isset($_SESSION['user_id'])) {
-    echo "<div class='alert alert-danger'>Please log in.</div>";
+     echo "<div class='alert alert-danger'><a href='../auth/login.php'>Please log in.</a></div>";
     include '../includes/footer.php';
     exit();
 }
-
 
 // Add Event logic
 if (isset($_POST['add_event'])) {
@@ -21,14 +19,14 @@ if (isset($_POST['add_event'])) {
     $description = trim($_POST['description']);
     $event_date = $_POST['event_date'];
     $type = $_POST['type'];
+    $status = 'Pending'; // New events are always pending
     $photo = $_FILES['photo']['name'];
 
     $target = '../uploads/' . basename($photo);
     if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
-        $stmt = $conn->prepare("INSERT INTO events (title, location, description, event_date, type, photo) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$title, $location, $description, $event_date, $type, $photo]);
-
-        echo "<div class='alert alert-success text-center'>Added successfully!</div>";
+        $stmt = $conn->prepare("INSERT INTO events (title, location, description, event_date, type, photo, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$title, $location, $description, $event_date, $type, $photo, $status]);
+        echo "<div class='alert alert-success text-center'>Event added successfully! Awaiting admin approval.</div>";
     }
 }
 
@@ -43,17 +41,13 @@ if (isset($_POST['register_event'])) {
         if ($checkStmt->fetchColumn() == 0) {
             $stmt = $conn->prepare("INSERT INTO event_reg (event_id, user_id) VALUES (?, ?)");
             $stmt->execute([$event_id, $user_id]);
-
             echo "<div class='alert alert-success text-center'>Registered successfully!</div>";
+        } else {
+           echo "<div class='alert alert-danger text-center'>You are already registered for this event.</div>";
         }
-         else{
-           echo "<div class='alert alert-danger text-center'>Registered already!</div>";
-
-        }
-
-
     }
 }
+
 // Pagination & Filters
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
@@ -63,7 +57,7 @@ $filterTitle = $_GET['title'] ?? '';
 $filterLocation = $_GET['location'] ?? '';
 $filterType = $_GET['type'] ?? '';
 
-$where = "WHERE 1=1";
+$where = "WHERE status = 'approved'";
 $params = [];
 
 if (!empty($filterTitle)) {
@@ -116,8 +110,8 @@ $pages = ceil($total / $limit);
   <?php foreach ($events as $event): ?>
     <div class="card mb-3">
       <div class="row g-0">
-        <div class="col-md-3">
-          <img src="../uploads/<?= htmlspecialchars($event['photo']) ?>" class="img-fluid rounded-circle my-5 ml-5" alt="Event Photo" width="200" height="200">
+        <div class="col-md-3 text-center">
+          <img src="../uploads/<?= htmlspecialchars($event['photo']) ?>" class="img-fluid rounded-circle my-4" alt="Event Photo" width="200" height="200">
         </div>
         <div class="col-md-9">
           <div class="card-body">
@@ -130,7 +124,7 @@ $pages = ceil($total / $limit);
       </div>
     </div>
 
-    <!-- Register Event Modal for each event -->
+    <!-- Register Event Modal -->
     <div class="modal fade" id="registerModal<?= $event['id'] ?>" tabindex="-1" aria-labelledby="registerModalLabel<?= $event['id'] ?>" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

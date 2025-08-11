@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 if (!isset($_SESSION['user_id'])) {
-    echo "<div class='alert alert-danger'>Please log in.</div>";
+     echo "<div class='alert alert-danger'><a href='../auth/login.php'>Please log in.</a></div>";
     include '../includes/footer.php';
     exit();
 }
@@ -19,22 +19,21 @@ if (isset($_POST['add_job'])) {
     $button_message = $_POST['button_message'];
     $button_link = $_POST['button_link'];
     $category = $_POST['category'];
-    $status = $_POST['status'];
     $appliable = isset($_POST['appliable']) ? 1 : 0;
     $date_to_hide = $_POST['date_to_hide'];
-    $advertiser = $_SESSION['advertiser']; 
+    $advertiser = $_POST['advertiser'];
     $posted_by = $_SESSION['user_id']; 
+    $status = 'Pending'; // Always default to pending
     $photo = $_FILES['photo']['name'];
 
     $target = '../uploads/' . basename($photo);
     if (move_uploaded_file($_FILES['photo']['tmp_name'], $target)) {
-        $stmt = $conn->prepare("INSERT INTO advertisement (title, description, button_message, button_link, photo, category, status, advertiser, posted_by, appliable, date_to_hide, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO advertisement 
+            (title, description, button_message, button_link, photo, category, status, advertiser, posted_by, appliable, date_to_hide, created_at) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
         $stmt->execute([$title, $description, $button_message, $button_link, $photo, $category, $status, $advertiser, $posted_by, $appliable, $date_to_hide]);
-       
-      }
-        echo "<div class='alert alert-success text-center'>Added successfully!</div>";
-
-    
+        echo "<div class='alert alert-success text-center'>Job posted successfully! Awaiting admin approval.</div>";
+    }
 }
 
 // Apply to a job
@@ -48,33 +47,24 @@ if (isset($_POST['apply_job'])) {
     if ($check->fetchColumn() == 0) {
         $stmt = $conn->prepare("INSERT INTO job_applications (job_id, user_id, applied_at) VALUES (?, ?, NOW())");
         $stmt->execute([$job_id, $user_id]);
-    
-    echo "<div class='alert alert-success text-center'>Applied successfully!</div>";
+        echo "<div class='alert alert-success text-center'>Applied successfully!</div>";
+    } else {
+        echo "<div class='alert alert-danger text-center'>You have already applied for this job.</div>";
     }
-    else{
-     echo "<div class='alert alert-danger text-center'>Applied already!</div>";
-
-    }
-
 }
 
 // Filters
 $category = $_GET['category'] ?? '';
-$status = $_GET['status'] ?? '';
 
-$where = "WHERE 1=1 AND (date_to_hide IS NULL OR date_to_hide >= CURDATE())";
+$where = "WHERE status = 'Active' AND (date_to_hide IS NULL OR date_to_hide >= CURDATE())";
 $params = [];
 
 if (!empty($category)) {
     $where .= " AND category = ?";
     $params[] = $category;
 }
-if (!empty($status)) {
-    $where .= " AND status = ?";
-    $params[] = $status;
-}
 
-// Fetch Jobs
+// Fetch Jobs (only active ones for users)
 $stmt = $conn->prepare("SELECT * FROM advertisement $where ORDER BY created_at DESC");
 $stmt->execute($params);
 $jobs = $stmt->fetchAll();
@@ -86,13 +76,6 @@ $jobs = $stmt->fetchAll();
   <form method="get" class="row g-2 mb-4">
     <div class="col-md-4">
       <input type="text" name="category" class="form-control" placeholder="Category" value="<?= htmlspecialchars($category) ?>">
-    </div>
-    <div class="col-md-4">
-      <select name="status" class="form-select form-control">
-        <option value="">All Status</option>
-        <option value="Active" <?= $status == 'Active' ? 'selected' : '' ?>>Active</option>
-        <option value="Closed" <?= $status == 'Closed' ? 'selected' : '' ?>>Closed</option>
-      </select>
     </div>
     <div class="col-md-4">
       <button class="btn btn-success">Filter</button>
@@ -166,7 +149,7 @@ $jobs = $stmt->fetchAll();
           </div>
           <div class="col-md-12">
             <label class="form-label">Advertiser name</label>
-            <textarea name="advertiser" rows="4" class="form-control" required></textarea>
+            <input type="text" name="advertiser" class="form-control" required>
           </div>
           <div class="col-md-6">
             <label class="form-label">Button Message</label>
@@ -175,13 +158,6 @@ $jobs = $stmt->fetchAll();
           <div class="col-md-6">
             <label class="form-label">Button Link</label>
             <input type="url" name="button_link" class="form-control" required>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label">Status</label>
-            <select name="status" class="form-select" required>
-              <option value="Active">Active</option>
-              <option value="Closed">Closed</option>
-            </select>
           </div>
           <div class="col-md-6">
             <label class="form-label">Hide After</label>

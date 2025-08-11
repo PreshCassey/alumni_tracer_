@@ -7,7 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    echo "<div class='alert alert-danger'>Please log in to access your profile.</div>";
+    echo "<div class='alert alert-danger'><a href='../auth/login.php'>Please log in to access your profile.</a></div>";
     include '../includes/footer.php';
     exit();
 }

@@ -14,26 +14,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      // Validate Matric number
         if (!preg_match('/^GFU\/\d{2}\/[A-Z]{3}\/\d{3}$/i', $matric_no)) {
             $matric_no_error = "Matric number must start with 'GFU/' followed by two digits, a forward slash, three alphabets, another forward slash, and three digits (e.g., GFU/21/IFT/002)";
-        } else {
-            // Check if Matric number is unique
-            $stmt = $conn->prepare("SELECT matric_no FROM users WHERE matric_no = ?");
-            $stmt->bindParam("s", $matric_no);
-            $stmt->execute();
-            // if ($stmt-> num_rows > 0) {
-              $matric_no_error = "Matric number already exists.";
-            // }
+        } 
+
+        // Check if matric exists
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE matric_no = ?");
+        $stmt->execute([$matric_no]);
+        if ($stmt->fetchColumn() > 0) {
+            $matric_no_error = "Matric number already exists.";
         }
 
-            // Validate email
-       
-            // Check if email is unique
-            $stmt = $conn->prepare("SELECT email FROM users WHERE email = ?");
-            $stmt->bindParam("s", $email);
-            // $stmt->execute();
-            // if ($stmt->num_rows > 0) {
-                $email_error = "Email Address already exists.";
-            // }
-          
+        // Check if email exists
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        if ($stmt->fetchColumn() > 0) {
+            $email_error = "Email already exists.";
+        }
         
         // Validate First name
         if (!preg_match('/^[a-zA-Z]+$/', $fname)) {
@@ -54,12 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (empty($matric_no_error) && empty($first_name_error) && empty($last_name_error) && empty($password_error)) {            
 
-
     $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password, graduation_year, matric_no, course) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if ($stmt->execute([$fname, $lname, $email, $password, $grad_year, $matric_no, $course])) {
-        echo "Registration successful!";
+            echo "<script>alert('Registration successful'); location.href='login.php';</script>";
     } else {
-        echo "Error registering user.";
+            echo "<script>alert('Failed to register. Try again.');</script>";
     }
 }
 }
@@ -68,14 +62,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
 </head>
 <body>
 <div class="container py-5">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="../index.php">
           <img src="../assets/images/Logo (2).png" alt="" srcset="" width="50" height="50">
           <span class="text-success font-weight-bold">ALUMNI CONNECT</span>
         </a>
