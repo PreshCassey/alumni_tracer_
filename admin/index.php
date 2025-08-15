@@ -12,19 +12,37 @@ $totaljobs = $conn->query("SELECT COUNT(*) FROM advertisement")->fetchColumn();
 $newJobPosts = $conn->query("SELECT COUNT(*) FROM advertisement WHERE status='pending'")->fetchColumn();
 $approvedJobPosts = $conn->query("SELECT COUNT(*) FROM advertisement WHERE status='active'")->fetchColumn();
 $cancelledJobPosts = $conn->query("SELECT COUNT(*) FROM advertisement WHERE status IN ('cancelled','rejected')")->fetchColumn();
-$totalJobRequests = $conn->query("SELECT COUNT(*) FROM job_applications")->fetchColumn();
 $totalAlumni = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn();
 ?>
 
 
     <!-- Main Content -->
-
+<div class="container mt-4 mb-5">
       <h3 class="mb-4">Dashboard</h3>
       <div class="row g-3">
+
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <div class="icon-box text-success">🧍</div>
+            <h5>Total Alumni Registration</h5>
+            <p class="fs-4 fw-bold"><?= $totalAlumni ?></p>
+            <a href="alumni.php" class="btn btn-success btn-sm">View Details</a>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card p-3 text-center">
+            <div class="icon-box text-success">📄</div>
+            <h5>Jobs / Ads Management</h5>
+            <p class="fs-4 fw-bold"><?= $totaljobs ?></p>
+            <a href="jobs.php" class="btn btn-success btn-sm">View Details</a>
+          </div>
+        </div>
+        
         <div class="col-md-4">
           <div class="card p-3 text-center">
             <div class="icon-box text-success">📅</div>
-            <h5>Total Events</h5>
+            <h5>Events Management</h5>
             <p class="fs-4 fw-bold"><?= $totalEvents ?></p>
             <a href="events.php" class="btn btn-success btn-sm">View Details</a>
           </div>
@@ -33,47 +51,15 @@ $totalAlumni = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn();
         <div class="col-md-4">
           <div class="card p-3 text-center">
             <div class="icon-box text-success">📄</div>
-            <h5>Total jobs/ Ads</h5>
-            <p class="fs-4 fw-bold"><?= $totaljobs ?></p>
-            <a href="jobs.php" class="btn btn-success btn-sm">View Details</a>
+            <h5>Reports</h5>
+            <a href="events.php" class="btn btn-success btn-sm">View Report</a>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <div class="icon-box text-success">✅</div>
-            <h5>Approved Job Post</h5>
-            <p class="fs-4 fw-bold"><?= $approvedJobPosts ?></p>
-            <a href="jobs.php" class="btn btn-success btn-sm">View Details</a>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <div class="icon-box text-success">❌</div>
-            <h5>Cancelled / Rejected Job Post</h5>
-            <p class="fs-4 fw-bold"><?= $cancelledJobPosts ?></p>
-            <a href="jobs.php" class="btn btn-success btn-sm">View Details</a>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <div class="icon-box text-success">📋</div>
-            <h5>Total Job Request</h5>
-            <p class="fs-4 fw-bold"><?= $totalJobRequests ?></p>
-            <a href="jobs.php" class="btn btn-success btn-sm">View Details</a>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card p-3 text-center">
-            <div class="icon-box text-success">🧍</div>
-            <h5>Total Alumni Reg</h5>
-            <p class="fs-4 fw-bold"><?= $totalAlumni ?></p>
-            <a href="alumni.php" class="btn btn-success btn-sm">View Details</a>
-          </div>
-        </div>
+
 
   
       </div>

@@ -227,14 +227,16 @@
           <div class="carousel-item">
             <div class="row justify-content-center align-items-center text-center">
               <div class="col-md-4">
-                <img src="./assets/images/me.jpg" class="rounded-circle img-fluid" alt="Alumni 3">
+                <img src="./assets/images/chi.jpg" class="rounded-circle img-fluid" alt="Alumni 3">
               </div>
               <div class="col-md-6">
-                <h4 class="text-success">Casmir Precious Amarachi</h4>
-                <small class="text-muted">Class of 2025 – Info Technology</small>
+                <h4 class="text-success">Ruth Chidogo Udah</h4>
+                <small class="text-muted">Class of 2025 – Bio Technology</small>
                 <p class="mt-3">
-                 "University was more than lectures and exams, it was where I discovered who I am. I learned resilience in the face of challenges, found friends who became family, and built dreams that still guide me today."
-                </p>
+"Greenfield was full of experiences for me the good, the bad, and all the in-betweens. But through it all, I learned, I grew, and I made friends I’ll always cherish. Greenfield will always be a place where my dreams found their wings. 
+<br>
+Every moment shaped me, and I’m glad to call myself a proud Greenfield alumna, and I look forward to watching Greenfield grow even more beautifully in the years ahead."            
+</p>
               </div>
             </div>
           </div>

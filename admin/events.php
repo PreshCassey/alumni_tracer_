@@ -44,7 +44,7 @@ $stmt->execute();
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<div class="container py-4">
+<div class="container py-4 mb-5">
     <h3 class="text-success mb-4">Manage Events</h3>
 
     <?php if (!empty($_SESSION['msg'])): ?>
@@ -53,7 +53,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">+ Add New Event</button>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-responsive table-striped">
         <thead class="table-success">
             <tr>
                 <th>#</th>

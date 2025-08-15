@@ -56,7 +56,7 @@ if (isset($_POST['apply_job'])) {
 // Filters
 $category = $_GET['category'] ?? '';
 
-$where = "WHERE status = 'Active' AND (date_to_hide IS NULL OR date_to_hide >= CURDATE())";
+$where = "WHERE status = 'approve' AND (date_to_hide IS NULL OR date_to_hide >= CURDATE())";
 $params = [];
 
 if (!empty($category)) {

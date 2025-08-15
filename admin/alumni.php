@@ -59,7 +59,7 @@ $courses = $conn->query("SELECT DISTINCT course FROM users ORDER BY course")->fe
 $years = $conn->query("SELECT DISTINCT graduation_year FROM users ORDER BY graduation_year DESC")->fetchAll(PDO::FETCH_COLUMN);
 ?>
 
-<div class="container py-4">
+<div class="container py-4 mb-5">
     <h3 class="text-success mb-4">Manage Alumni</h3>
 
     <?php if (!empty($_SESSION['msg'])): ?>
@@ -93,7 +93,7 @@ $years = $conn->query("SELECT DISTINCT graduation_year FROM users ORDER BY gradu
     </form>
 
     <!-- Alumni Table -->
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-responsive table-striped">
         <thead class="table-success">
             <tr>
                 <th>#</th>

@@ -96,7 +96,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
       <small class="text-muted">Live statistics for Greenfield Alumni Tracer</small>
     </div>
     <div>
-      <a href="dashboard.php" class="btn btn-success">Back to Dashboard</a>
+      <a href="index.php" class="btn btn-success">Back to Dashboard</a>
     </div>
   </div>
 

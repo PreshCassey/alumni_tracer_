@@ -85,8 +85,8 @@ if (!isset($_SESSION['user_id'])) {
           📃
         </div>
         <h5 class="fw-bold">Jobs/ Advertisment</h5>
-        <p class="text-success fw-bold">Check for job listing or advertisment</p>
-        <a href="view_advertisement.php" class="text-decoration-none text-success fw-bold">Jobs -></a>
+        <p class="text-success fw-bold">Add or Check for job listing or advertisment</p>
+        <a href="view_advertisements.php" class="text-decoration-none text-success fw-bold">Jobs -></a>
     </div>
 
 
@@ -101,7 +101,7 @@ if (!isset($_SESSION['user_id'])) {
           📅
         </div>
         <h5 class="fw-bold">UPCOMING EVENTS</h5>
-        <p class="text-muted">No event found!</p>
+        <p class="text-muted">View and Add upcoming events!</p>
         <a href="events.php" class="text-decoration-none text-success fw-bold">All Events →</a>
       </div>
     </div>

@@ -80,7 +80,7 @@ if (isset($_POST['add_job'])) {
         $photo, $_POST['category'], $_POST['advertiser'], $_SESSION['admin_id'],
         $_POST['appliable'], $_POST['date_to_hide']
     ]);
-    header("Location: admin_manage_jobs.php");
+    header("Location: jobs.php");
     exit;
 }
 
@@ -88,15 +88,15 @@ if (isset($_POST['add_job'])) {
 if (isset($_POST['delete_job_id'])) {
     $stmt = $conn->prepare("DELETE FROM advertisement WHERE id = ?");
     $stmt->execute([$_POST['delete_job_id']]);
-    header("Location: admin_manage_jobs.php");
+    header("Location: jobs.php");
     exit;
 }
 
 // Handle Approve
 if (isset($_POST['approve_job_id'])) {
-    $stmt = $conn->prepare("UPDATE advertisement SET status = 'active' WHERE id = ?");
+    $stmt = $conn->prepare("UPDATE advertisement SET status = 'approve' WHERE id = ?");
     $stmt->execute([$_POST['approve_job_id']]);
-    header("Location: admin_manage_jobs.php");
+    header("Location: jobs.php");
     exit;
 }
 ?>
@@ -105,9 +105,15 @@ if (isset($_POST['approve_job_id'])) {
         <div class="alert alert-success"><?= $_SESSION['msg']; unset($_SESSION['msg']); ?></div>
     <?php endif; ?>
 
-<div class="container mt-4">
-    <h3 class="mb-4">Manage Jobs (<?= $totalJobs ?> total)</h3>
 
+
+<div class="container mt-4 mb-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Manage Jobs (<?= $totalJobs ?> total)</h3>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addJobModal">
+            + Add Job
+        </button>
+    </div>
     <!-- Filters -->
     <form method="get" class="row g-2 mb-3">
         <div class="col-md-3">
@@ -143,7 +149,7 @@ if (isset($_POST['approve_job_id'])) {
     </form>
 
     <!-- Jobs Table -->
-    <table class="table table-bordered">
+    <table class="table table-responsive table-bordered">
         <thead class="table-success">
             <tr>
                 <th>Title</th>
@@ -151,7 +157,7 @@ if (isset($_POST['approve_job_id'])) {
                 <th>Category</th>
                 <th>Status</th>
                 <th>Appliable</th>
-                <th>Date to Hide</th>
+                <th>Date of Expiration</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -178,8 +184,8 @@ if (isset($_POST['approve_job_id'])) {
     <nav>
         <ul class="pagination">
             <?php for ($i=1; $i<=$totalPages; $i++): ?>
-                <li class="page-item <?= $page==$i?'active':'' ?>">
-                    <a class="page-link" href="?page=<?= $i ?>&title=<?= $filterTitle ?>&category=<?= $filterCategory ?>&status=<?= $filterStatus ?>"><?= $i ?></a>
+                <li class="page-item <?= $page==$i?'approve':'' ?>">
+                    <a class="page-link" href="?page=<?= $i ?>&advertiser=<?= $filter_advertiser ?>&category=<?= $filter_category ?>&status=<?= $filter_status ?>"><?= $i ?></a>
                 </li>
             <?php endfor; ?>
         </ul>
@@ -222,6 +228,7 @@ if (isset($_POST['approve_job_id'])) {
     </div>
 </div>
 
+
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog">
@@ -249,8 +256,7 @@ if (isset($_POST['approve_job_id'])) {
             <input type="hidden" name="change_status_id" id="statusJobId">
             <select name="new_status" class="form-control" required>
                 <option value="">Select Status</option>
-                <option value="active">Active</option>
-                <option value="pending">Pending</option>
+                <option value="approved">Approved</option>
                 <option value="rejected">Rejected</option>
             </select>
             <div class="mt-3 text-end">

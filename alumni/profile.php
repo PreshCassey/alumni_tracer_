@@ -25,23 +25,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $qualification = $_POST['qualification'] ?? null;
     $company = $_POST['company'] ?? null;
 
-    // File uploads
-    $profile_image = null;
-    $resume = null;
+// File uploads
+$profile_image = null;
+$resume = null;
 
-    if (!is_dir('../uploads')) {
-        mkdir('../uploads', 0777, true);
-    }
+// Function to validate uploads
+function validate_upload($file, $allowed_types, $max_kb) {
+    if (isset($file['tmp_name']) && is_uploaded_file($file['tmp_name'])) {
+        // Check size
+        $file_size_kb = round($file['size'] / 1024, 2);
+        if ($file_size_kb > $max_kb) {
+            throw new Exception("File too large! Max allowed size is {$max_kb}KB.");
+        }
 
-    if (!empty($_FILES['profile_image']['name'])) {
-        $profile_image = time() . '_' . basename($_FILES['profile_image']['name']);
-        move_uploaded_file($_FILES['profile_image']['tmp_name'], "../uploads/$profile_image");
-    }
+        // Secure MIME type check
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
 
-    if (!empty($_FILES['resume']['name'])) {
-        $resume = time() . '_' . basename($_FILES['resume']['name']);
-        move_uploaded_file($_FILES['resume']['tmp_name'], "../uploads/$resume");
-    }
+        if (!in_array($file_type, $allowed_types)) {
+            throw new Exception("Invalid file type: {$file_type}");
+        }
+
+        // Sanitize file name
+        $safe_name = preg_replace("/[^a-zA-Z0-9_\.-]/", "_", basename($file['name']));
+        $new_filename = time() . "_" . $safe_name;
+
+        return $new_filename;
+   }
+         return null;
+        }
+
+        // Ensure uploads directory exists
+        $upload_dir = '../uploads';
+        if (!is_dir($upload_dir)) {
+            mkdir($upload_dir, 0777, true);
+        }
+
+        try {
+            // Profile Image Validation (300KB max, JPG/PNG only)
+            if (!empty($_FILES['profile_image']['name'])) {
+                $profile_image = validate_upload($_FILES['profile_image'], ['image/jpeg', 'image/jpg', 'image/png'], 300);
+                move_uploaded_file($_FILES['profile_image']['tmp_name'], "$upload_dir/$profile_image");
+            }
+
+            // Resume Validation (500KB max, PDF only)
+            if (!empty($_FILES['resume']['name'])) {
+                $resume = validate_upload($_FILES['resume'], ['application/pdf'], 500);
+                move_uploaded_file($_FILES['resume']['tmp_name'], "$upload_dir/$resume");
+            }
+
+        } catch (Exception $e) {
+            echo "<div class='alert alert-danger'>" . htmlspecialchars($e->getMessage()) . "</div>";
+        }
+
 
     // Check if record exists
     $check = $conn->prepare("SELECT id FROM user_details WHERE user_id = ?");
