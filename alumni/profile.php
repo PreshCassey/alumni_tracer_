@@ -103,6 +103,7 @@ function validate_upload($file, $allowed_types, $max_kb) {
     }
 
     echo "<div class='alert alert-success'>Profile updated successfully.</div>";
+  logAction($conn, $_SESSION['user_id'] ?? null, 'Profile Update', 'Updated profile fields');
 }
 
 // ===== FETCH USER INFO =====

@@ -81,6 +81,8 @@ if (isset($_POST['add_job'])) {
         $_POST['appliable'], $_POST['date_to_hide']
     ]);
     header("Location: jobs.php");
+    logAction($conn, null, 'Added Job successfully', "job_title: [title]");
+
     exit;
 }
 
@@ -89,6 +91,8 @@ if (isset($_POST['delete_job_id'])) {
     $stmt = $conn->prepare("DELETE FROM advertisement WHERE id = ?");
     $stmt->execute([$_POST['delete_job_id']]);
     header("Location: jobs.php");
+    logAction($conn, null, 'Delete Job successfully', "job_id: [delete_job_id]");
+
     exit;
 }
 
@@ -97,6 +101,7 @@ if (isset($_POST['approve_job_id'])) {
     $stmt = $conn->prepare("UPDATE advertisement SET status = 'approve' WHERE id = ?");
     $stmt->execute([$_POST['approve_job_id']]);
     header("Location: jobs.php");
+    logAction($conn, null, 'Approve Job successfully', "job_id: [approve_job_id]");
     exit;
 }
 ?>

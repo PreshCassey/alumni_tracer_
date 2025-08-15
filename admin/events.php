@@ -16,6 +16,8 @@ if (isset($_POST['delete_event_id'])) {
     $stmt->execute([$_POST['delete_event_id']]);
     $_SESSION['msg'] = "Event deleted successfully!";
     header("Location: events.php");
+    logAction($conn, null, 'Delete Event successfully', "Event_id: [delete_event_id]");
+
     exit;
 }
 
@@ -25,6 +27,8 @@ if (isset($_POST['toggle_status_id'])) {
     $stmt->execute([$_POST['toggle_status_id']]);
     $_SESSION['msg'] = "Event status updated!";
     header("Location: events.php");
+    logAction($conn, null, 'Approve Event successfully', "Event_id: [toggle_status_id]");
+
     exit;
 }
 
@@ -34,6 +38,8 @@ if (isset($_POST['add_event'])) {
     $stmt->execute([$_POST['title'], $_POST['location'], $_POST['description'], $_POST['event_date'], $_POST['type'], $_SESSION['admin_id']]);
     $_SESSION['msg'] = "Event added successfully!";
     header("Location: events.php");
+    logAction($conn, null, 'Added Event successfully', "title: [title]");
+
     exit;
 }
 
@@ -154,6 +160,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 function confirmDelete(id) {
     document.getElementById('deleteEventId').value = id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
+    
 }
 </script>
 

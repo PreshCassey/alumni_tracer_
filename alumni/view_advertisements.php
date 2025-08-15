@@ -33,6 +33,7 @@ if (isset($_POST['add_job'])) {
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
         $stmt->execute([$title, $description, $button_message, $button_link, $photo, $category, $status, $advertiser, $posted_by, $appliable, $date_to_hide]);
         echo "<div class='alert alert-success text-center'>Job posted successfully! Awaiting admin approval.</div>";
+        logAction($conn, $_SESSION['user_id'] ?? null, 'Post Job', "Job ID: {$job_id}, Title: {$title}");
     }
 }
 
@@ -48,6 +49,7 @@ if (isset($_POST['apply_job'])) {
         $stmt = $conn->prepare("INSERT INTO job_applications (job_id, user_id, applied_at) VALUES (?, ?, NOW())");
         $stmt->execute([$job_id, $user_id]);
         echo "<div class='alert alert-success text-center'>Applied successfully!</div>";
+         logAction($conn, $_SESSION['user_id'] ?? null, 'Applied for Job', "Job ID: {$job_id}");
     } else {
         echo "<div class='alert alert-danger text-center'>You have already applied for this job.</div>";
     }

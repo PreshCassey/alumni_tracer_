@@ -22,6 +22,8 @@ if (isset($_POST['delete_alumni_id'])) {
     $stmt->execute([$_POST['delete_alumni_id']]);
     $_SESSION['msg'] = "Alumni deleted successfully!";
     header("Location: alumni.php");
+    logAction($conn, null, 'Delete Alumi successfully', "id: [delete_alumni_id]");
+
     exit;
 }
 
@@ -155,6 +157,7 @@ $years = $conn->query("SELECT DISTINCT graduation_year FROM users ORDER BY gradu
 function confirmDelete(id) {
     document.getElementById('deleteAlumniId').value = id;
     new bootstrap.Modal(document.getElementById('deleteModal')).show();
+
 }
 </script>
 

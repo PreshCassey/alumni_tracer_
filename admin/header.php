@@ -48,6 +48,8 @@
 <body>
 <?php
 session_start();
+require_once __DIR__ . '/function.php'; 
+
 if (!isset($_SESSION['admin_id'])) {
   header("Location: login.php");
   exit();
@@ -78,6 +80,7 @@ $admin = $_SESSION['admin_username'];
       <a href="events.php">Events</a>
       <a href="alumni.php">Alumni List</a>
       <a href="jobs.php">Job Posts</a>
+      <a href="admin_audit_log.php">Security Audit</a>
       <a class="btn btn-danger" href="../auth/logout.php">Logout</a>
     </div>
 

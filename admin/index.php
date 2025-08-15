@@ -52,7 +52,7 @@ $totalAlumni = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn();
           <div class="card p-3 text-center">
             <div class="icon-box text-success">📄</div>
             <h5>Reports</h5>
-            <a href="events.php" class="btn btn-success btn-sm">View Report</a>
+            <a href="reports.php" class="btn btn-success btn-sm">View Report</a>
           </div>
         </div>
 

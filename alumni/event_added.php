@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_event_id'])) {
     $stmt = $conn->prepare("DELETE FROM events WHERE id = ? AND posted_by = ?");
     $stmt->execute([$_POST['delete_event_id'], $user_id]);
     echo "<script>alert('Event deleted successfully!'); window.location.href='event_added.php';</script>";
+     logAction($conn, $_SESSION['user_id'] ?? null, 'Delete Event', "Job ID: {$event_id}");
 }
 
 // Handle cancel registration
@@ -20,7 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cancel_app_id'])) {
     $stmt = $conn->prepare("DELETE FROM event_reg WHERE id = ? AND user_id = ?");
     $stmt->execute([$_POST['cancel_app_id'], $user_id]);
     echo "<script>alert('Registration cancelled successfully!'); window.location.href='event_added.php';</script>";
+logAction($conn, $_SESSION['user_id'] ?? null, 'Event Unregister', "Event ID: {$event_id}, Reason: {$reason}");
+
 }
+
 
 // Pagination Setup
 $limit = 5;

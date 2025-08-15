@@ -21,14 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($password === $admin['password']) {
                     $_SESSION['admin_id'] = $admin['admin_id'];
                     $_SESSION['admin_username'] = $admin['username'];
-
+                    logAction($conn, $admin['admin_id'], 'Admin Login', 'Successful admin login');
                     header("Location: index.php");
                     exit;
                 } else {
                     $error = "Incorrect password.";
+                     logAction($conn, null, 'Failed Admin Login', "Username: {$username}");
+
                 }
             } else {
                 $error = "No admin found with that username.";
+                logAction($conn, null, 'Failed Admin Login', "Username: {$username}");
+
             }
         } catch (PDOException $e) {
             $error = "Database error: " . $e->getMessage();

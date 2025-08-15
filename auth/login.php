@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '../../admin/function.php'; 
 require '../config/database.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -14,9 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['first_name'];
         header('Location: ../alumni/alumni.php');
+        logAction($conn, $user['id'], 'User Login', 'Successful login');
+
         exit();
     } else {
+      // when login fails
         $error = 'Invalid email or password';
+        logAction($conn, null, 'Failed User Login', "Username: {$email}");
+
     }
 }
 ?>
@@ -39,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="card shadow p-4">
           <div class="card-body p-5">
             <h3 class="text-center mb-4">Login to Alumni Connect</h3>
+             <p class= "alert alert-danger"><?php echo $error ?? ''; ?></p>
             <form method="post">
               <div class="mb-3">
                 <label for="email" class="form-label">Email Address<span class="text-danger">*</span></label>
@@ -65,6 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 
-    <p><?php echo $error ?? ''; ?></p>
+   
 </body>
 </html>

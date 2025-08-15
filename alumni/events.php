@@ -27,6 +27,8 @@ if (isset($_POST['add_event'])) {
         $stmt = $conn->prepare("INSERT INTO events (title, location, description, event_date, type, photo, status) VALUES (?, ?, ?, ?, ?, ?, ?)");
         $stmt->execute([$title, $location, $description, $event_date, $type, $photo, $status]);
         echo "<div class='alert alert-success text-center'>Event added successfully! Awaiting admin approval.</div>";
+        logAction($conn, $_SESSION['user_id'] ?? null, 'Post Event', "Event ID: {$event_id}, Title: {$title}");
+
     }
 }
 
@@ -42,6 +44,7 @@ if (isset($_POST['register_event'])) {
             $stmt = $conn->prepare("INSERT INTO event_reg (event_id, user_id) VALUES (?, ?)");
             $stmt->execute([$event_id, $user_id]);
             echo "<div class='alert alert-success text-center'>Registered successfully!</div>";
+             logAction($conn, $_SESSION['user_id'] ?? null, 'Register for an Event', "Event ID: {$event_id}");
         } else {
            echo "<div class='alert alert-danger text-center'>You are already registered for this event.</div>";
         }

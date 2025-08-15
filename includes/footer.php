@@ -6,7 +6,8 @@
           <img src="../assets/images/Main-logo.png" alt="" srcset="" height="100">
         </div>
         <div class="col-md-4">
-          <p>&copy; 2025 Alumni Connect. All rights reserved. <br> Final Year Project</p>
+          <p>&copy; 2025 Alumni Connect. All rights reserved. <br> Final Year Project <br> 
+          <small class="mt-3">Praise Peter Ayuba</small></p>
         </div>
         <div class="col-md-4">
           <p>@ <a href="https://preshcassey.github.io/PreshCassey/index.html" class="text-success">presh cassey</a></p>

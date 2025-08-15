@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['delete_job_id'])) {
     $stmt = $conn->prepare("DELETE FROM advertisement WHERE id = ? AND posted_by = ?");
     $stmt->execute([$_POST['delete_job_id'], $user_id]);
     echo "<script>alert('Job deleted successfully!'); window.location.href='job_added.php';</script>";
+    logAction($conn, $_SESSION['user_id'] ?? null, 'Delete Job', "Job ID: {$job_id}");
 }
 
 // Handle cancel application
@@ -20,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cancel_app_id'])) {
     $stmt = $conn->prepare("DELETE FROM job_applications WHERE id = ? AND user_id = ?");
     $stmt->execute([$_POST['cancel_app_id'], $user_id]);
     echo "<script>alert('Application cancelled successfully!'); window.location.href='job_added.php';</script>";
+    logAction($conn, $_SESSION['user_id'], 'Cancel Job application', "Job ID: {$job_id}");
+
 }
 
 // Pagination Setup
