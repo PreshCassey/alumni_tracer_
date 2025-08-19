@@ -10,7 +10,7 @@
           <small class="mt-3">Praise Peter Ayuba</small></p>
         </div>
         <div class="col-md-4">
-          <p>@ <a href="https://preshcassey.github.io/PreshCassey/index.html" class="text-success">presh cassey</a></p>
+          <p>Developed by - <a href="https://preshcassey.github.io/PreshCassey/index.html" class="text-success">presh cassey</a></p>
         </div>
       </div>
     </div>
