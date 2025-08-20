@@ -76,10 +76,10 @@ $admin = $_SESSION['admin_username'];
         <h6 class="mt-2"><?php echo $admin; ?></h6>
       </div>
       <a href="index.php">Dashboard</a>
-      <a href="reports.php">Report</a>
+      <a href="alumni.php">Manage Alumni</a>
       <a href="events.php">Events</a>
-      <a href="alumni.php">Alumni List</a>
       <a href="jobs.php">Job Posts</a>
+      <a href="reports.php">Report</a>
       <a href="admin_audit_log.php">Security Audit</a>
       <a class="btn btn-danger" href="../auth/logout.php">Logout</a>
     </div>

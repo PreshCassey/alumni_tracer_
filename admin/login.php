@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../config/database.php';
-
+require_once __DIR__ . '/function.php'; 
 $error = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

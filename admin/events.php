@@ -48,10 +48,50 @@ $total = $conn->query("SELECT COUNT(*) FROM events")->fetchColumn();
 $stmt = $conn->prepare("SELECT * FROM events ORDER BY event_date DESC LIMIT $limit OFFSET $offset");
 $stmt->execute();
 $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Search & Filter
+$search = $_GET['search'] ?? '';
+$filter_type = $_GET['type'] ?? '';
+$filter_status = $_GET['status'] ?? '';
+$filter_date = $_GET['event_date'] ?? '';
+
+// Build query with filters
+$where = [];
+$params = [];
+
+if (!empty($search)) {
+    $where[] = "(title LIKE ? OR description LIKE ?)";
+    $params[] = "%$search%"; 
+    $params[] = "%$search%";
+}
+
+if (!empty($filter_type)) {
+    $where[] = "type = ?";
+    $params[] = $filter_type;
+}
+
+if (!empty($filter_status)) {
+    $where[] = "status = ?";
+    $params[] = $filter_status;
+}
+
+if (!empty($filter_date)) {
+    $where[] = "DATE(event_date) = ?";
+    $params[] = $filter_date;
+}
+
+$whereSQL = $where ? "WHERE " . implode(" AND ", $where) : "";
+
+// Fetch Events
+$sql = "SELECT * FROM events $whereSQL ORDER BY event_date DESC";
+$stmt = $conn->prepare($sql);
+$stmt->execute($params);
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+
 <div class="container py-4 mb-5">
-    <h3 class="text-success mb-4">Manage Events</h3>
+    <h3 class="text-success mb-4">Manage Events(<?= $total?> total)</h3>
 
     <?php if (!empty($_SESSION['msg'])): ?>
         <div class="alert alert-success"><?= $_SESSION['msg']; unset($_SESSION['msg']); ?></div>
@@ -59,6 +99,34 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">+ Add New Event</button>
 
+    
+<!-- Filters -->
+<form method="get" class="row g-2 mb-3">
+    <div class="col-md-3">
+        <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" class="form-control" placeholder="Search event">
+    </div>
+    <div class="col-md-2">
+        <select name="type" class="form-control">
+            <option value="">All Types</option>
+            <option value="seminar" <?= $filter_type=="seminar"?'selected':'' ?>>Seminar</option>
+            <option value="workshop" <?= $filter_type=="workshop"?'selected':'' ?>>Workshop</option>
+            <option value="conference" <?= $filter_type=="conference"?'selected':'' ?>>Conference</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select name="status" class="form-control">
+            <option value="">All Status</option>
+            <option value="pending" <?= $filter_status=="pending"?'selected':'' ?>>Pending</option>
+            <option value="approved" <?= $filter_status=="approved"?'selected':'' ?>>Approved</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <input type="date" name="date" value="<?= htmlspecialchars($filter_date) ?>" class="form-control">
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-success w-100">Filter</button>
+    </div>
+</form>
     <table class="table table-bordered table-responsive table-striped">
         <thead class="table-success">
             <tr>

@@ -6,6 +6,8 @@ if (!isset($_SESSION['admin_id'])) {
         header("Location: login.php");
     exit();
 }
+
+
 // Search and Filter
 $search = $_GET['search'] ?? '';
 $filter_course = $_GET['course'] ?? '';
@@ -59,14 +61,44 @@ $alumni = $stmt->fetchAll(PDO::FETCH_ASSOC);
 // Fetch unique courses and years for filter dropdowns
 $courses = $conn->query("SELECT DISTINCT course FROM users ORDER BY course")->fetchAll(PDO::FETCH_COLUMN);
 $years = $conn->query("SELECT DISTINCT graduation_year FROM users ORDER BY graduation_year DESC")->fetchAll(PDO::FETCH_COLUMN);
+
+
+// Handle Add Alumni
+if (isset($_POST['add_alumni'])) {
+    $stmt = $conn->prepare("INSERT INTO users 
+(first_name, last_name, email, password, graduation_year, matric_no, course, created_at) 
+VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt->execute([
+    $_POST['first_name'], 
+    $_POST['last_name'], 
+    $_POST['email'], 
+    password_hash($_POST['password'], PASSWORD_DEFAULT), 
+    $_POST['graduation_year'], 
+    $_POST['matric_no'], 
+    $_POST['course'], 
+    date('Y-m-d H:i:s')
+]);
+    $_SESSION['msg'] = "alumni added successfully!";
+    header("Location: alumni.php");
+    logAction($conn, null, 'Added Alumni successfully', "First Name: {$_POST['first_name']}");
+
+    exit;
+}
 ?>
 
 <div class="container py-4 mb-5">
-    <h3 class="text-success mb-4">Manage Alumni</h3>
+  
+        <div class="d-flex justify-content-between align-items-center mb-3">
+         <h3 class="text-success mb-4">Manage Alumni (<?= $total?> total)</h3>
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addalumniModal">
+            + Add Alumni
+        </button>
+    </div>
 
     <?php if (!empty($_SESSION['msg'])): ?>
         <div class="alert alert-success"><?= $_SESSION['msg']; unset($_SESSION['msg']); ?></div>
     <?php endif; ?>
+
 
     <!-- Filters -->
     <form method="get" class="row g-2 mb-3">
@@ -147,6 +179,49 @@ $years = $conn->query("SELECT DISTINCT graduation_year FROM users ORDER BY gradu
             <input type="hidden" name="delete_alumni_id" id="deleteAlumniId">
             <button type="submit" class="btn btn-danger">Yes, Delete</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Alumni Modal -->
+<div class="modal fade" id="addalumniModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">Add alumni</h5></div>
+      <div class="modal-body">
+        <form method="post">
+            <input type="hidden" name="add_alumni" value="1">
+                    <div class="mb-4">
+                        <label for="first_name" class="form-label">First Name <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="first_name" placeholder="First Name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="last_name" class="form-label">Last Name <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="last_name" placeholder="Last Name" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="course" class="form-label">Course <span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="course" placeholder="Course">
+                    </div>
+                    <div class="mb-4">
+                        <label for="graduation_year" class="form-label">Graduation year <span class="text-danger">*</span></label>
+                        <input class="form-control" type="number" name="graduation_year" placeholder="Graduation Year">
+                    </div>
+                    <div class="mb-4">
+                        <label for="matric_no" class="form-label">Matric Number:<span class="text-danger">*</span></label>
+                        <input class="form-control" type="text" name="matric_no" placeholder="Matric Number">
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input class="form-control" type="email" name="email" placeholder="Email" required>    
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                        <input class="form-control" type="password" name="password" placeholder="Password" required>
+                    </div>
+            <button type="submit" class="btn btn-success">Add alumni</button>
         </form>
       </div>
     </div>
