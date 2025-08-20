@@ -1,8 +1,5 @@
 
----
-
 ## **README for Alumni Tracer Application**
-```markdown
 # 🎓 Alumni Tracer Application
 
 ![PHP](https://img.shields.io/badge/PHP-8.0%2B-blue) ![MySQL](https://img.shields.io/badge/MySQL-Database-orange) ![Status](https://img.shields.io/badge/Status-Live-brightgreen)  
@@ -11,7 +8,7 @@ A **web-based alumni tracking platform** that helps universities **connect with 
 ---
 
 ## 🚀 Demo
-🔗 **Live Demo:** [https://youralumnitracerlink.com](https://youralumnitracerlink.com)  
+🔗 **Live Demo:** [gfu-alumni.infinityfree.me](gfu-alumni.infinityfree.me)  
 
 ---
 
