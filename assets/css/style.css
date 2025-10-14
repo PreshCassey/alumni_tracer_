@@ -9,3 +9,212 @@
     background-size: cover;
 }
 
+/* ================================
+   🌟 AlumEx Global Theme Styles
+   ================================ */
+
+/* Font & Base */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fb;
+  color: #222;
+  overflow-x: hidden;
+}
+
+/* Primary Colors */
+
+:root {
+        --alumex-deep: #071033; /* fallback deep navy */
+  --alumex-blue: #001f3f;
+  --alumex-gold: #d4af37;
+  --alumex-silver: #c0c0c0;
+}
+
+.text-blue { color: var(--alumex-blue) !important; }
+.text-gold { color: var(--alumex-gold) !important; }
+.text-silver { color: var(--alumex-silver) !important; }
+
+.btn-gold {
+  background-color: var(--alumex-gold);
+  border: none;
+  color: #fff;
+  transition: 0.3s;
+}
+.btn-gold:hover {
+  background-color: #b9962f;
+  color: #fff;
+}
+
+.navbar {
+  background-color: var(--alumex-blue);
+}
+
+/* Navbar */
+.navbar {
+  background: var(--alumex-blue) !important;
+}
+.navbar-brand {
+  font-weight: 600;
+  color: var(--alumex-gold) !important;
+}
+.nav-link {
+  color: white !important;
+}
+.nav-link:hover {
+  color: var(--alumex-gold) !important;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--alumex-blue);
+  min-height: 100vh;
+  color: white;
+  padding: 1rem 0;
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+.sidebar a {
+  display: block;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  transition: all 0.3s;
+}
+.sidebar a:hover, .sidebar a.active {
+  background: rgba(255, 215, 0, 0.1);
+  border-left: 3px solid var(--alumex-gold);
+  color: var(--alumex-gold);
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 260px;
+  padding: 2rem;
+}
+
+/* Buttons */
+.btn-success, .btn-primary {
+  background: var(--alumex-blue) !important;
+  border: none;
+}
+.btn-success:hover, .btn-primary:hover {
+  background: var(--alumex-gold) !important;
+  color: #000;
+}
+
+.btn-alumex-outline {
+  border: 2px solid #facc15; /* gold */
+  color: #1e3a8a;
+}
+.btn-alumex-outline:hover {
+  background-color: #facc15;
+  color: #fff;
+}
+ .btn-alumex {
+    background: var(--alumex-blue);
+    color: var(--alumex-gold);
+    border: 1px solid rgba(212,169,55,0.12);
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:600;
+    transition: all .18s ease;
+  }
+  .btn-alumex:hover {
+    background: var(--alumex-silver);
+    color: #133c8a;
+    border-color: rgba(212,169,55,0.28);
+    transform: translateY(-3px);
+  }
+  .btn-outline-silver {
+    border: 1px solid rgba(255,255,255,0.06);
+    color: #133c8a;
+    background: var(--alumex-gold);
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:600;
+    margin-top: 8px;
+    transition: all .18s ease;
+  }
+  .btn-outline-silver:hover {
+    background: var(--alumex-blue);
+    transform: translateY(-3px);
+    color: var(--alumex-silver);
+  }
+
+
+/* Cards */
+.card {
+  border: none;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+/* Footer */
+footer {
+  background: var(--alumex-blue);
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Modals */
+.modal-header {
+  background: var(--alumex-blue);
+  color: white;
+  border-bottom: none;
+}
+
+/* Table */
+.table thead {
+  background: var(--alumex-blue);
+  color: white;
+}
+.table-hover tbody tr:hover {
+  background-color: rgba(13, 71, 161, 0.1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--alumex-silver);
+  border-radius: 4px;
+}
+/* Hover Glow Effect for Gold Elements */
+a:hover, .btn-primary:hover, .btn-success:hover {
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* Page Title Styling */
+.page-title {
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--alumex-blue);
+  border-left: 4px solid var(--alumex-gold);
+  padding-left: 10px;
+  margin-bottom: 1.5rem;
+}
+
+/* Smooth Transition for Interactions */
+* {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Input Fields */
+input, select, textarea {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 0.6rem;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--alumex-blue);
+  box-shadow: 0 0 5px rgba(13, 71, 161, 0.2);
+  outline: none;
+}

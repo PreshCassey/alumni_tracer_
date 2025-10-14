@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <div class="login-card p-4 bg-white rounded shadow" style="max-width: 400px; width: 100%;">
     <div class="text-center mb-4">
-        <h3 class="text-success">Admin Login</h3>
+        <h3 class="text-blue">Admin Login</h3>
         <p class="text-muted small">Sign in to manage the alumni system</p>
     </div>
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="password" class="form-label">Password</label>
             <input type="password" name="password" id="password" required class="form-control">
         </div>
-        <button type="submit" class="btn btn-success w-100">Login</button>
+        <button type="submit" class="btn btn-gold w-100">Login</button>
     </form>
 </div>
 
