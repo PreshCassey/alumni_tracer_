@@ -147,6 +147,148 @@ body {
     color: var(--alumex-silver);
   }
 
+  .card-chat {
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.chat-box {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.05);
+}
+
+.message {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.message.you {
+  align-items: flex-end;
+}
+
+.message.you .bubble {
+  background: #d1e7dd;
+  border-radius: 15px 15px 0 15px;
+}
+
+.message.them .bubble {
+  background: #f1f3f5;
+  border-radius: 15px 15px 15px 0;
+}
+
+.bubble {
+  padding: .6rem .9rem;
+  max-width: 70%;
+  word-wrap: break-word;
+}
+
+.list-group-item {
+  border: none;
+  border-radius: 12px;
+  margin-bottom: .5rem;
+  transition: all .2s ease;
+}
+
+.list-group-item:hover {
+  background: #e9f7ef;
+  transform: translateX(3px);
+}
+
+.alumni-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+
+.chat-box {
+  max-height: 500px;
+  overflow-y: auto;
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+}
+
+.chat-message {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.chat-message.you {
+  justify-content: flex-end;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: 10px 15px;
+  border-radius: 15px;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chat-message.you .chat-bubble {
+  background-color: #d1f8d1;
+  border-top-right-radius: 0;
+}
+
+.chat-message.other .chat-bubble {
+  background-color: #e7f0ff;
+  border-top-left-radius: 0;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 15px;
+}
+
+.chat-header img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  border-radius: 25px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  border-radius: 25px;
+  padding: 10px 25px;
+  background-color: #007b5e;
+  color: white;
+  border: none;
+}
+.chat-input button:hover {
+  background-color: #005c47;
+}
+
+.list-group-item:hover {
+  background-color: #f1fdf1;
+}
+
 
 /* Cards */
 .card {

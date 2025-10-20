@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ALUMEX — Connecting Graduates. Tracing Impact.</title>
-  <link rel="shortcut icon" href="assets/images/alumex-logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="assets/images/nobglogo.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -253,12 +254,12 @@
   </section>
 
   <!-- ===== GIVE BACK ===== -->
-  <section class="text-white text-center alumex-blue py-5" style="background: var(--alumex-blue);">
+  <section class="text-white text-center py-5 mb-2" style="background: var(--alumex-gold);">
     <div class="container">
-      <h2 class="fw-bold text-gold">Give Back Programs</h2>
+      <h2 class="fw-bold text-blue">Give Back Programs</h2>
       <p class="lead">Support the next generation of leaders.</p>
       <p>Contribute to scholarships, mentorship programs, or community initiatives. Every contribution matters.</p>
-      <a href="#" class="btn btn-gold mt-3 px-5">Support Now</a>
+      <a href="#" class="btn btn-alumex mt-3 px-5">Support Now</a>
     </div>
   </section>
 

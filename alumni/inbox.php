@@ -44,19 +44,17 @@ if (isset($_GET['delete'])) {
 $chat = [];
 $profile = null;
 if ($receiver_id) {
-    $chatStmt = $conn->prepare("
-        SELECT m.*, u.first_name, u.last_name 
-        FROM messages m
-        JOIN users u ON m.sender_id = u.id
-        WHERE (sender_id = ? AND receiver_id = ?) OR (sender_id = ? AND receiver_id = ?)
-        ORDER BY m.created_at ASC
-    ");
+    $chatStmt = $conn->prepare("SELECT m.*, u.first_name, u.last_name, d.profile_image FROM messages m
+JOIN users u ON m.sender_id = u.id
+JOIN user_details d ON u.id = d.user_id
+WHERE (m.sender_id = ? AND m.receiver_id = ?) 
+OR (m.sender_id = ? AND m.receiver_id = ?)ORDER BY m.created_at ASC;");
+
     $chatStmt->execute([$current_user, $receiver_id, $receiver_id, $current_user]);
     $chat = $chatStmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Fetch profile info
-    $pstmt = $conn->prepare("
-        SELECT u.*, d.job_position, d.company, d.profile_image, u.graduation_year 
+    $pstmt = $conn->prepare("SELECT u.*, d.job_position, d.company, d.profile_image, u.graduation_year 
         FROM users u 
         JOIN user_details d ON u.id = d.user_id 
         WHERE u.id = ?
@@ -68,9 +66,9 @@ if ($receiver_id) {
 // Fetch recent chats (if no current chat)
 $recentChats = [];
 if (!$receiver_id) {
-    $recentStmt = $conn->prepare("
-        SELECT DISTINCT u.id, u.first_name, u.last_name 
+    $recentStmt = $conn->prepare("SELECT DISTINCT u.id, u.first_name, u.last_name 
         FROM users u
+        JOIN user_details d ON (u.id = d.user_id)
         JOIN messages m ON (u.id = m.sender_id OR u.id = m.receiver_id)
         WHERE (m.sender_id = :uid OR m.receiver_id = :uid)
         AND u.id != :uid
@@ -84,7 +82,8 @@ if (!$receiver_id) {
 // Fetch alumni directory (only if no chat and no recent chats)
 $alumni = [];
 if (!$receiver_id && empty($recentChats)) {
-    $alumniStmt = $conn->prepare("SELECT id, first_name, last_name, email FROM users WHERE id != ?");
+$alumniStmt = $conn->prepare("SELECT u.id, u.first_name, u.last_name, u.email, 
+        d.profile_image FROM users u JOIN user_details d ON u.id = d.user_id WHERE u.id != ?");
     $alumniStmt->execute([$current_user]);
     $alumni = $alumniStmt->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -122,85 +121,74 @@ $alumni = $alumniStmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="container mt-4">
     <?php if ($receiver_id): ?>
-        <!-- Chat Window -->
-        <div class="card mb-3">
-            <?php if ($profile): ?>
-            <div class="card-body d-flex align-items-center">
-                <img src="../uploads/<?= $profile['profile_image'] ?: 'default.jpg' ?>" width="60" class="rounded-circle me-3">
-                <div>
-                    <h5><?= htmlspecialchars($profile['first_name'] . ' ' . $profile['last_name']) ?></h5>
-                    <small><?= htmlspecialchars($profile['job_position']) ?> at <?= htmlspecialchars($profile['company']) ?> (Class of <?= htmlspecialchars($profile['graduation_year']) ?>)</small>
-                </div>
+      <!-- Chat Header -->
+      <div class="card mb-3">
+        <?php if ($profile): ?>
+        <div class="card-body d-flex align-items-center">
+          <img src="../uploads/<?= $profile['profile_image'] ?: 'default.jpg' ?>" width="60" class="rounded-circle me-3">
+          <div>
+            <h5 class="mb-0"><?= htmlspecialchars($profile['first_name'] . ' ' . $profile['last_name']) ?></h5>
+            <small class="text-muted">
+              <?= htmlspecialchars($profile['job_position']) ?> at <?= htmlspecialchars($profile['company']) ?>
+              (Class of <?= htmlspecialchars($profile['graduation_year']) ?>)
+            </small>
+          </div>
+        </div>
+        <?php endif; ?>
+      </div>
+
+      <!-- Chat Messages -->
+      <div class="chat-box mb-3" style="max-height:400px; overflow-y:auto;">
+        <?php foreach ($chat as $msg): ?>
+          <div class="message <?= $msg['sender_id'] == $current_user ? 'you' : 'them' ?>">
+            <div class="bubble">
+              <?= nl2br(htmlspecialchars($msg['message'])) ?>
             </div>
-            <?php endif; ?>
-        </div>
+            <small class="text-muted mt-1">
+              <?= $msg['sender_id'] == $current_user ? 'You' : htmlspecialchars($msg['first_name']) ?> • 
+              <?= date('M d, h:i A', strtotime($msg['created_at'])) ?>
+              <?php if ($msg['sender_id'] == $current_user): ?>
+                <a href="?chat_with=<?= $receiver_id ?>&delete=<?= $msg['id'] ?>" class="text-danger ms-2">Delete</a>
+              <?php endif; ?>
+            </small>
+          </div>
+        <?php endforeach; ?>
+      </div>
 
-        <div class="chat-box mb-3" style="max-height: 400px; overflow-y: auto;">
-            <?php foreach ($chat as $msg): ?>
-                <div class="mb-2">
-                    <strong><?= $msg['sender_id'] == $current_user ? 'You' : htmlspecialchars($msg['first_name'] . ' ' . $msg['last_name']) ?>:</strong>
-                    <p class="mb-1"><?= nl2br(htmlspecialchars($msg['message'])) ?></p>
-                    <small class="text-muted"><?= date('M d, Y h:i A', strtotime($msg['created_at'])) ?></small>
-                    <?php if ($msg['sender_id'] == $current_user): ?>
-                        <a href="?chat_with=<?= $receiver_id ?>&delete=<?= $msg['id'] ?>" class="text-danger">Delete</a>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+      <!-- Send Message -->
+      <form method="post" class="mb-5">
+        <div class="input-group">
+          <input type="text" name="message" class="form-control" placeholder="Type your message..." required>
+          <button type="submit" name="send_message" class="btn btn-success px-4">Send</button>
         </div>
+      </form>
 
-        <form method="post" class="mb-5">
-            <div class="input-group">
-                <input type="text" name="message" class="form-control" required>
-                <button type="submit" name="send_message" class="btn btn-success">Send</button>
-            </div>
-        </form>
+  <?php elseif (!empty($recentChats)): ?>
+      <h4 class="mb-3">💬 Recently Chatted</h4>
+      <ul class="list-group">
+        <?php foreach ($recentChats as $chatUser): ?>
+          <li class="list-group-item d-flex align-items-center">
+            <img src="../uploads/<?= $chatUser['profile_image'] ?? 'default.jpg' ?>" class="alumni-avatar">
+            <a href="?chat_with=<?= $chatUser['id'] ?>" class="text-decoration-none text-dark flex-grow-1">
+              <?= htmlspecialchars($chatUser['first_name'] . ' ' . $chatUser['last_name']) ?>
+            </a>
+          </li>
+        <?php endforeach; ?>
+      </ul><br><br><br>
 
-    <?php elseif (!empty($recentChats)): ?>
-        <!-- Recently Chatted -->
-        <h4>💬 Recently Chatted</h4>
-        <ul class="list-group m-5">
-            <?php foreach ($recentChats as $chatUser): ?>
-                <li class="list-group-item">
-                    <a href="?chat_with=<?= $chatUser['id'] ?>" class="text-decoration-none">
-                        <?= htmlspecialchars($chatUser['first_name'] . ' ' . $chatUser['last_name']) ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-
-    <?php else: ?>
-        <!-- Alumni Directory with Search -->
-        <h3>👥 Alumni Directory</h3>
-        <form class="d-flex my-4" method="GET">
-        <div class="row">
-        <div class="col-md-3 mb-2">
-        <input class="form-control" name="name" type="search" placeholder="Search by name">
-        </div>
-        <div class="col-md-2 mb-3">
-        <input class="form-control" name="grad_year" type="search" placeholder="Grad year">
-        </div>
-        <div class="col-md-2 mb-3">
-        <input class="form-control" name="course" type="search" placeholder="Course">
-        </div>
-        <div class="col-md-2 mb-3">
-        <input class="form-control" name="matric_no" type="search" placeholder="Matric no">
-        </div>
-        <div class="col-md-3 mb-2">
-        <button class="btn btn-outline-success px-5" type="submit">Search</button>
-        </div>
-        </div>
-        </form>
-
-        <ul class="list-group m-5">
-            <?php foreach ($alumni as $alumnus): ?>
-                <li class="list-group-item">
-                    <a href="?chat_with=<?= $alumnus['id'] ?>" class="text-decoration-none">
-                        <?= htmlspecialchars($alumnus['first_name'] . ' ' . $alumnus['last_name']) ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
+  <?php else: ?>
+      <h3 class="mb-3">👥 Alumni Directory</h3>
+      <ul class="list-group">
+        <?php foreach ($alumni as $alumnus): ?>
+          <li class="list-group-item d-flex align-items-center">
+            <img src="../uploads/<?= $alumnus['profile_image'] ?? 'default.jpg' ?>" class="alumni-avatar">
+            <a href="?chat_with=<?= $alumnus['id'] ?>" class="text-decoration-none text-dark flex-grow-1">
+              <?= htmlspecialchars($alumnus['first_name'] . ' ' . $alumnus['last_name']) ?>
+            </a>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+  <?php endif; ?>
 </div>
 
 <?php include '../includes/footer.php'; ?>
