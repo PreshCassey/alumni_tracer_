@@ -92,11 +92,11 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
 
   <div class="d-flex justify-content-between align-items-center mb-4">
     <div>
-      <h3 class="mb-0 text-success">Admin Reports</h3>
+      <h3 class="mb-0 text-blue">Admin Reports</h3>
       <small class="text-muted">Live statistics for Greenfield Alumni Tracer</small>
     </div>
     <div>
-      <a href="index.php" class="btn btn-success">Back to Dashboard</a>
+      <a href="index.php" class="btn btn-gold ">Back to Dashboard</a>
     </div>
   </div>
 
@@ -109,7 +109,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
             <div class="text-uppercase small text-muted">Total Alumni</div>
             <div class="stat-number"><?= htmlspecialchars($totalUsers) ?></div>
           </div>
-          <div class="text-success fs-2">🧑‍🎓</div>
+          <div class="text-blue fs-2">🧑‍🎓</div>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
             <div class="text-uppercase small text-muted">Total Events</div>
             <div class="stat-number"><?= htmlspecialchars($totalEvents) ?></div>
           </div>
-          <div class="text-success fs-2">📅</div>
+          <div class="text-blue fs-2">📅</div>
         </div>
       </div>
     </div>
@@ -133,7 +133,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
             <div class="text-uppercase small text-muted">Total Jobs</div>
             <div class="stat-number"><?= htmlspecialchars($totalJobs) ?></div>
           </div>
-          <div class="text-success fs-2">💼</div>
+          <div class="text-blue fs-2">💼</div>
         </div>
       </div>
     </div>
@@ -145,7 +145,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
             <div class="text-uppercase small text-muted">Messages</div>
             <div class="stat-number"><?= htmlspecialchars($totalMessages) ?></div>
           </div>
-          <div class="text-success fs-2">✉</div>
+          <div class="text-blue fs-2">✉</div>
         </div>
       </div>
     </div>
@@ -180,7 +180,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
       <div class="card p-3">
         <div class="d-flex justify-content-between align-items-center mb-2">
           <h6 class="mb-0">Latest Events</h6>
-          <a href="#" class="small text-success">View all</a>
+          <a href="#" class="small text-blue">View all</a>
         </div>
         <div class="table-responsive">
           <table class="table table-sm table-borderless">
@@ -207,7 +207,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
       <div class="card p-3">
         <div class="d-flex justify-content-between align-items-center mb-2">
           <h6 class="mb-0">Latest Job Adverts</h6>
-          <a href="#" class="small text-success">View all</a>
+          <a href="#" class="small text-blue">View all</a>
         </div>
         <div class="table-responsive">
           <table class="table table-sm table-borderless">
@@ -220,7 +220,7 @@ $pie_data = json_encode(array_map(function($r){ return (int)$r['cnt']; }, $categ
                 <td><?= htmlspecialchars($jb['advertiser']) ?></td>
                 <td>
                   <?php if (strtolower($jb['status']) === 'active'): ?>
-                    <span class="badge bg-success">Active</span>
+                    <span class="badge bg-blue">Active</span>
                   <?php else: ?>
                     <span class="badge bg-warning text-dark"><?= htmlspecialchars($jb['status']) ?: 'Pending' ?></span>
                   <?php endif; ?>

@@ -240,7 +240,7 @@ $alumni = $stmt->fetchAll();
       <div class="glass-card" role="article" aria-labelledby="alum-<?= $alum['id'] ?>">
         <div class="card-top">
           <div class="avatar" aria-hidden="true">
-            <img src="../uploads/<?= htmlspecialchars($alum['profile_image'] ?: 'default.png') ?>" alt="Profile of <?= htmlspecialchars($alum['first_name'] . ' ' . $alum['last_name']) ?>">
+            <img src="../uploads/<?= htmlspecialchars($alum['profile_image'] ?: 'default.jpg') ?>" alt="Profile of <?= htmlspecialchars($alum['first_name'] . ' ' . $alum['last_name']) ?>">
           </div>
 
           <div class="alum-meta">
@@ -276,7 +276,7 @@ $alumni = $stmt->fetchAll();
               ?>
               <div class="row">
                 <div class="col-md-4 text-center">
-                  <img src="../uploads/<?= htmlspecialchars($detail['profile_image'] ?: 'default.png') ?>" class="rounded-circle mb-3" width="140" height="140" alt="Profile">
+                  <img src="../uploads/<?= htmlspecialchars($detail['profile_image'] ?: 'default.jpg') ?>" class="rounded-circle mb-3" width="140" height="140" alt="Profile">
                   <h5 class="mt-2"><?= htmlspecialchars($detail['first_name'] . ' ' . $detail['last_name']) ?></h5>
                   <p class="text-muted">Matric No: <?= htmlspecialchars($detail['matric_no']) ?></p>
                   <p class="text-muted"><?= htmlspecialchars($detail['email']) ?></p>

@@ -89,8 +89,8 @@ $stmt->execute([
 <div class="container py-4 mb-5">
   
         <div class="d-flex justify-content-between align-items-center mb-3">
-         <h3 class="text-success mb-4">Manage Alumni (<?= $total?> total)</h3>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addalumniModal">
+         <h3 class="text-blue  mb-4">Manage Alumni (<?= $total?> total)</h3>
+        <button class="btn btn-gold " data-bs-toggle="modal" data-bs-target="#addalumniModal">
             + Add Alumni
         </button>
     </div>
@@ -122,7 +122,7 @@ $stmt->execute([
             </select>
         </div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-success w-100">Filter</button>
+            <button type="submit" class="btn btn-gold  w-100">Filter</button>
         </div>
     </form>
 
@@ -221,7 +221,7 @@ $stmt->execute([
                         <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                         <input class="form-control" type="password" name="password" placeholder="Password" required>
                     </div>
-            <button type="submit" class="btn btn-success">Add alumni</button>
+            <button type="submit" class="btn btn-gold ">Add alumni</button>
         </form>
       </div>
     </div>

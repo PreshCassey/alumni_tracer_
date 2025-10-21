@@ -91,13 +91,13 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 <div class="container py-4 mb-5">
-    <h3 class="text-success mb-4">Manage Events(<?= $total?> total)</h3>
+    <h3 class="text-blue  mb-4">Manage Events(<?= $total?> total)</h3>
 
     <?php if (!empty($_SESSION['msg'])): ?>
         <div class="alert alert-success"><?= $_SESSION['msg']; unset($_SESSION['msg']); ?></div>
     <?php endif; ?>
 
-    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">+ Add New Event</button>
+    <button class="btn btn-gold  mb-3" data-bs-toggle="modal" data-bs-target="#addEventModal">+ Add New Event</button>
 
     
 <!-- Filters -->
@@ -124,7 +124,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <input type="date" name="date" value="<?= htmlspecialchars($filter_date) ?>" class="form-control">
     </div>
     <div class="col-md-2">
-        <button class="btn btn-success w-100">Filter</button>
+        <button class="btn btn-gold  w-100">Filter</button>
     </div>
 </form>
     <table class="table table-bordered table-responsive table-striped">
@@ -151,7 +151,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <td>
                     <form method="post" style="display:inline;">
                         <input type="hidden" name="toggle_status_id" value="<?= $event['id'] ?>">
-                        <button type="submit" class="btn btn-sm btn-success"><?= $event['status'] == 'approved' ? 'Unapprove' : 'Approve' ?></button>
+                        <button type="submit" class="btn btn-sm btn-gold "><?= $event['status'] == 'approved' ? 'Unapprove' : 'Approve' ?></button>
                     </form>
                     <button class="btn btn-sm btn-danger" onclick="confirmDelete(<?= $event['id'] ?>)">Delete</button>
                 </td>
@@ -217,7 +217,7 @@ $events = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <label>Type</label>
                 <input type="text" name="type" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-success">Add Event</button>
+            <button type="submit" class="btn btn-gold ">Add Event</button>
         </form>
       </div>
     </div>

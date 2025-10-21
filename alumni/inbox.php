@@ -48,7 +48,7 @@ if ($receiver_id) {
 JOIN users u ON m.sender_id = u.id
 JOIN user_details d ON u.id = d.user_id
 WHERE (m.sender_id = ? AND m.receiver_id = ?) 
-OR (m.sender_id = ? AND m.receiver_id = ?)ORDER BY m.created_at ASC;");
+OR (m.sender_id = ? AND m.receiver_id = ?) ORDER BY m.created_at ASC;");
 
     $chatStmt->execute([$current_user, $receiver_id, $receiver_id, $current_user]);
     $chat = $chatStmt->fetchAll(PDO::FETCH_ASSOC);
@@ -66,8 +66,7 @@ OR (m.sender_id = ? AND m.receiver_id = ?)ORDER BY m.created_at ASC;");
 // Fetch recent chats (if no current chat)
 $recentChats = [];
 if (!$receiver_id) {
-    $recentStmt = $conn->prepare("SELECT DISTINCT u.id, u.first_name, u.last_name 
-        FROM users u
+    $recentStmt = $conn->prepare("SELECT DISTINCT u.id, u.first_name, u.last_name, d.profile_image FROM users u
         JOIN user_details d ON (u.id = d.user_id)
         JOIN messages m ON (u.id = m.sender_id OR u.id = m.receiver_id)
         WHERE (m.sender_id = :uid OR m.receiver_id = :uid)
@@ -89,7 +88,7 @@ $alumniStmt = $conn->prepare("SELECT u.id, u.first_name, u.last_name, u.email,
 }
 
 
-$where = "WHERE id != ?";
+$where = "WHERE u.id != ?";
 $params = [$current_user];
 
 if (!empty($_GET['name'])) {
@@ -112,8 +111,10 @@ if (!empty($_GET['matric_no'])) {
     $where .= " AND matric_no LIKE ?";
     $params[] = "%" . $_GET['matric_no'] . "%";
 }
+$alumniStmt = $conn->prepare("SELECT u.id, u.first_name, u.last_name, u.email, d.profile_image 
+    FROM users u JOIN user_details d ON u.id = d.user_id $where");
 
-$alumniStmt = $conn->prepare("SELECT id, first_name, last_name, email FROM users $where");
+// $alumniStmt = $conn->prepare("SELECT id, first_name, last_name, email FROM users $where");
 $alumniStmt->execute($params);
 $alumni = $alumniStmt->fetchAll(PDO::FETCH_ASSOC);
 

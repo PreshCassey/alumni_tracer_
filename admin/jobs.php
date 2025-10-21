@@ -115,7 +115,7 @@ if (isset($_POST['approve_job_id'])) {
 <div class="container mt-4 mb-5">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Manage Jobs (<?= $totalJobs ?> total)</h3>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addJobModal">
+        <button class="btn btn-gold " data-bs-toggle="modal" data-bs-target="#addJobModal">
             + Add Job
         </button>
     </div>
@@ -149,7 +149,7 @@ if (isset($_POST['approve_job_id'])) {
             </select>
         </div>
         <div class="col-md-2">
-            <button type="submit" class="btn btn-success w-100">Filter</button>
+            <button type="submit" class="btn btn-gold  w-100">Filter</button>
         </div>
     </form>
 
@@ -177,7 +177,7 @@ if (isset($_POST['approve_job_id'])) {
                 <td><?= htmlspecialchars($job['date_to_hide']) ?></td>
                 <td>
                     <button class="btn btn-warning btn-sm" onclick="approveModal(<?= $job['id'] ?>)">Change Status</button>
-                    <!-- <a href="edit_job.php?id=<?= $job['id'] ?>" class="btn btn-success btn-sm">Edit</a> -->
+                    <!-- <a href="edit_job.php?id=<?= $job['id'] ?>" class="btn btn-gold  btn-sm">Edit</a> -->
                     <button class="btn btn-danger btn-sm" onclick="deleteJob(<?= $job['id'] ?>)">Delete</button>
                 </td>
             </tr>
@@ -201,7 +201,7 @@ if (isset($_POST['approve_job_id'])) {
 <div class="modal fade" id="addJobModal" tabindex="-1">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-success text-white">
+            <div class="modal-header bg-blue text-white">
                 <h5 class="modal-title">Add Job</h5>
                 <button class="btn-close" data-bs-dismiss="modal"></button>
             </div>
@@ -226,7 +226,7 @@ if (isset($_POST['approve_job_id'])) {
                     <input type="date" name="date_to_hide" class="form-control mb-2" required>
                 </div>
                 <div class="modal-footer">
-                    <button name="add_job" class="btn btn-success">Save</button>
+                    <button name="add_job" class="btn btn-gold ">Save</button>
                 </div>
             </form>
         </div>
@@ -265,7 +265,7 @@ if (isset($_POST['approve_job_id'])) {
                 <option value="rejected">Rejected</option>
             </select>
             <div class="mt-3 text-end">
-                <button type="submit" class="btn btn-success">Update Status</button>
+                <button type="submit" class="btn btn-gold ">Update Status</button>
             </div>
         </form>
       </div>

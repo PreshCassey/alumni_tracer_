@@ -46,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Admin Login - Greenfield Alumni</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-icon">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -70,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <label for="password" class="form-label">Password</label>
             <input type="password" name="password" id="password" required class="form-control">
         </div>
-        <button type="submit" class="btn btn-gold w-100">Login</button>
+        <button type="submit" class="btn btn-success w-100">Login</button>
     </form>
 </div>
 
