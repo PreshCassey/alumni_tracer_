@@ -16,7 +16,7 @@
 }
 
 .sidebar {
-  background: linear-gradient(180deg, #002b5b 0%, #013a7c 100%);
+  background: linear-gradient(180deg, #002b5b 0%, #001f3f 100%);
   color: white;
   padding-top: 1rem;
 }

@@ -68,6 +68,5 @@ $totalAlumni = $conn->query("SELECT COUNT(*) FROM users")->fetchColumn();
   
       </div>
     </div>
-<?php
-require '../includes/footer.php';
-?>
+
+<?php require 'footer.php'; ?>

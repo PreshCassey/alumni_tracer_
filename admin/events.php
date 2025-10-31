@@ -232,4 +232,4 @@ function confirmDelete(id) {
 }
 </script>
 
-<?php require '../includes/footer.php'; ?>
+<?php require 'footer.php'; ?>

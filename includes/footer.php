@@ -8,7 +8,6 @@
       <div class="col-md-4">
         <div class="d-flex align-items-center mb-3">
           <img src="assets/images/nobglogo.png" alt="ALUMEX Logo" width="150" height="150" class="me-2">
-          <img src="../assets/images/nobglogo.png" alt="ALUMEX Logo" width="150" height="150" class="me-2">
           <h5 class="fw-bold text-gold mb-0">ALUMEX</h5>
         </div>
         <p class="text-light small">

@@ -60,4 +60,4 @@ $logs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 </div>
 
-<?php require '../includes/footer.php'; ?>
+<?php require 'footer.php'; ?>
