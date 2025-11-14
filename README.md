@@ -8,7 +8,7 @@ A **web-based alumni tracking platform** that helps universities **connect with 
 ---
 
 ## 🚀 Demo
-🔗 **Live Demo:** [https://alumex.great-site.net/]([https://alumex.great-site.net/])  
+🔗 **Live Demo:** [https://alumex.great-site.net/](https://alumex.great-site.net/)  
 
 ---
 
@@ -65,4 +65,4 @@ MIT License — feel free to use, modify, and distribute with credit.
 
 Precious Amarachi Casmir (Presh Cassey) — Developer & Project Creator
 📧 Email: Preciouscasmir04@gmail.com
-🌐 Portfolio:[https://preshcassey.github.io/PreshCassey/index.html]([https://preshcassey.github.io/PreshCassey/index.html])
+🌐 Portfolio:[https://preshcassey.github.io/PreshCassey/index.html](https://preshcassey.github.io/PreshCassey/index.html)
