@@ -8,7 +8,7 @@ A **web-based alumni tracking platform** that helps universities **connect with 
 ---
 
 ## 🚀 Demo
-🔗 **Live Demo:** [gfu-alumni.infinityfree.me](gfu-alumni.infinityfree.me)  
+🔗 **Live Demo:** [https://alumex.great-site.net/]([https://alumex.great-site.net/])  
 
 ---
 
@@ -63,6 +63,6 @@ MIT License — feel free to use, modify, and distribute with credit.
 
 ## 👩‍💻 Author
 
-Precious Amarachi Casmir (Cassey) — Developer & Project Creator
-📧 Email: Preciouscasmir@gmail.com
-🌐 Portfolio: file:///C:/Users/HP%20USER/Documents/PreshCassey/index.html
+Precious Amarachi Casmir (Presh Cassey) — Developer & Project Creator
+📧 Email: Preciouscasmir04@gmail.com
+🌐 Portfolio:[https://preshcassey.github.io/PreshCassey/index.html]([https://preshcassey.github.io/PreshCassey/index.html])
